@@ -1,0 +1,61 @@
+﻿table {
+    margin: 5px 0px 5px 0px;
+    width: 100%;
+    border: 1px solid #B17C7C;
+    border-collapse: collapse;
+}
+
+.head {
+    background-color: #C0A5A5;
+}
+
+.container {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : wrap;
+}
+.button {
+    padding: 10px 20px 10px 20px;
+    width: 25%;
+    display: block;
+    min-height: 45px;
+    max-height: auto;
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    background-color: #C0A5A5;
+}
+.button:hover {
+    background-color: #B17C7C;
+}
+
+
+td {
+    border: 1px solid #B17C7C;
+    padding: 5px;
+}
+
+
+.def-margin {
+    margin : 10px 5px 10px 5px;
+}
+.text-vertical {
+    display : flex;
+    justify-content : center;
+    align-content : center;
+    flex-wrap : wrap;
+}
+.button-size {
+    width: 200px;
+    height: 60px;
+}
+.link-style {
+    color : #7e0000;
+    text-decoration : none;
+}
+.link-style:hover {
+    color: #B17C7C;
+}
+.text-centre {
+    text-align: center;
+}

@@ -1,0 +1,28 @@
+﻿.info-wrapper {
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #B17C7C;
+    border-radius: 20px;
+    width: 95%;
+}
+
+.button {
+    margin: auto;
+    display : block;
+    text-align : center;
+    align-content : center;
+    text-decoration : none;
+    color : black;
+    width: 95%;
+    height: 45px;
+    font-size: 22px;
+    padding-left: 5px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: #B17C7C;
+    background-color: #C0A5A5;
+}
+.button:hover {
+    background-color: #B17C7C;
+    border-color: black;
+}

@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/main.css" />
+    <link rel="stylesheet" href="~/css/@ViewData["css"]" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Qui</title>
+</head>
+<body>
+    <header class="header-block">
+        <span class="header__full-title">Qui</span>
+        <span class="header__page-name">- @ViewData["Title"]</span>
+    </header>
+    <div class="render-container">
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿@page
+@model RazorPagesApp.Pages.Administration.UserResultsModel
+@{
+    ViewData["Title"] = "Результаты";
+    ViewData["css"] = "administration/user_results.css";
+}
+
+<main class="main-container text-style">
+    <div class="href-wrapper">
+        <a class="button" href="/Administration/Questions">Назад</a>
+        <a class="button" href="/Administration/UserResults?handler=ExcelFile">Скачать результаты</a>
+        <a class="button" href="/Administration/UserResults?handler=Clear">Удалить всех</a>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <td class="head">Номер</td>
+                <td class="head">Дата</td>
+                <td class="head">Фамилия</td>
+                <td class="head">Имя</td>
+                <td class="head">Отчество</td>
+                <td class="head">Возраст</td>
+                <td class="head">Пол</td>
+                <td class="head"></td>
+                <td class="head">Подробнее</td>
+                <td class="head"></td>
+            </tr>
+            @for (int i = 0; i < Model.Users.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@Model.GetStartDate(Model.Users[i])</td>
+                    <td>@Model.Users[i].Sername</td>
+                    <td>@Model.Users[i].Name</td>
+                    <td>@Model.Users[i].FatherName</td>
+                    <td>@Model.Users[i].Age</td>
+                    <td>@(Model.Users[i].Sex.ToString() == "Man"? "Мужчина": "Женщина")</td>
+                    <td>@Model.Users[i].Progress.RightAnswers / @Model.Users[i].Progress.Answers.Count</td>
+                    <td class="button-td">
+                        <a class="a-style" href="/Administration/User?Id=@Model.Users[i].Id">Полный отчёт</a>
+                    </td>
+                    <td class="button-td">
+                        <a class="a-style" href="/Administration/UserResults?handler=DeleteUser&Id=@Model.Users[i].Id">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+</main>

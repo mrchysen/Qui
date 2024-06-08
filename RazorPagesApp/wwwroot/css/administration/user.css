@@ -1,0 +1,35 @@
+﻿.href-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.button {
+    padding: 10px 20px 10px 20px;
+    width: 50%;
+    display: block;
+    min-height: 45px;
+    max-height: auto;
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    background-color: #C0A5A5;
+}
+
+.button:hover {
+    background-color: #B17C7C;
+}
+
+.table-progress {
+    margin: 5px 0px 5px 0px;
+    width: 100%;
+    border: 1px solid #B17C7C;
+    border-collapse: collapse;
+}
+.table-progress td {
+    border: 1px solid #B17C7C;
+    padding: 5px;
+}
+.head {
+    background-color: #C0A5A5;
+}

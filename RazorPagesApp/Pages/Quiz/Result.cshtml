@@ -1,0 +1,39 @@
+﻿@page
+
+@model RazorPagesApp.Pages.Quiz.ResultModel
+
+@{
+    ViewData["css"] = "quiz/result.css";
+    ViewData["Title"] = "Результаты";
+}
+
+<main>
+    <section class="info-section">
+        <div class="text-style">Спасибо за прохождение тестирования. @Model.ResultText</div>
+        <div class="text-style">Вы нам очень помогли!</div>
+    </section>
+    
+    <hr class="line"/>
+    <table>
+        <tr>
+            <td class="head text-style">Номер</td>
+            <td class="head text-style">Вопрос</td>
+            <td class="head text-style">Ответ</td>
+            <td class="head text-style">Правильность</td>
+        </tr>
+        @for (int i = 0; i < Model.Progress.Answers.Count; i++)
+        {
+            <tr>
+                <td class="text-centre text-style">@(i + 1)</td>
+                <td class="text-style">@Model.Questions[i].Text</td>
+                <td class="text-style">@Model.Progress.Answers[i]</td>
+                <td class="text-style">@(Model.Questions[i].IsAnswer(Model.Progress.Answers[i]) ? "Правильно" : "Неправильно")</td>
+            </tr>
+        }
+    </table>
+
+    <hr class="line" />
+
+    <a class="button text-style" href="/Quiz/Authentication">Пройти заново</a>
+
+</main>

@@ -1,0 +1,35 @@
+﻿@page
+@model RazorPagesApp.Pages.Quiz.QuestionModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["css"] = "quiz/question.css";
+    ViewData["Title"] = "Тест";
+}
+
+<main class="main-container">
+    <div class="question-wrapper text-style">
+        Вопрос @(Model.Progress.CurrentQuestion + 1):
+
+        @Model.Question.Text
+    </div>
+    <div class="form-wrapper">
+        <form method="post" name="Form1">
+            <textarea class="text-style" required name="Answer" cols="50" rows="3" placeholder="Ответ"></textarea>
+        
+            <input hidden name="WasSearched" value="0" />
+            <input hidden name="StartTime" value="0" />
+            <input hidden name="EndTime" value="0" />
+        
+            <div class="button-wrapper">
+                <div class="button-box">
+                    <input class="button left-button-radius text-style" type="submit" value="Далее" />
+                </div>
+                <div class="button-box">
+                    <button class="button right-button-radius text-style" type="button" id="SearchButton"><i class='bx bx-search'></i>Поиск в интернет</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="~/js/TimeControl.js"></script>
+</main>

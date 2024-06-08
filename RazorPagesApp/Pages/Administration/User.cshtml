@@ -1,0 +1,92 @@
+﻿@page 
+@model RazorPagesApp.Pages.Administration.UserModel
+@{
+    ViewData["Title"] = "Пользователь";
+    ViewData["css"] = "administration/user.css";
+}
+
+<main class="text-style">
+
+
+    <div class="href-wrapper">
+        <a class="button" href="/Administration/UserResults">Назад</a>
+        <a class="button" href="/Administration/UserResults?handler=DeleteUser&Id=@Model.User.Id.ToString()">Удалить</a>
+    </div>
+
+<div>
+    <div>
+        <table>
+            <tr>
+                <td >
+                    Фио
+                </td>
+                    <td >
+                    @Model.User.Sername @Model.User.Name @Model.User.FatherName
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Возраст
+                </td>
+                <td>
+                    @Model.User.Age
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Пол
+                </td>
+                <td>
+                    @(Model.User.Sex.ToString() == "Man" ? "Мужчина" : "Женщина")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Количество вопросов:
+                </td>
+                <td>
+                    @Model.User.Progress.Answers.Count
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Количество правильных оветов:
+                </td>
+                <td>
+                    @Model.User.Progress.RightAnswers
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   Дата прохождения:
+                </td>
+                <td>
+                    @Model.GetStartDate(Model.User)
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <table class="table-progress">
+        <tr>
+                <td class="head">Номер вопроса</td>
+                <td class="head">Ответ</td>
+                <td class="head">Время начала</td>
+                <td class="head">Время подачи ответа</td>
+                <td class="head">Поиск в интернет</td>
+                <td class="head">Правильность</td>
+        </tr>
+        @for(int i = 0; Model.IndexCondition(i); i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@Model.User.Progress.Answers[i]</td>
+                <td>@Model.User.Progress.AnswerStartDateTime[i].ToLongTimeString()</td>
+                <td>@Model.User.Progress.AnswerEndDateTime[i].ToLongTimeString()</td>
+                <td>@(Model.User.Progress.WasSearched[i]?1:0)</td>
+                <td>@(Model.User.Progress.IsRightAnswerList[i]?1:0)</td>
+            </tr>
+        }
+    </table>
+</div>
+</main>

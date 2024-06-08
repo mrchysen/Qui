@@ -1,0 +1,80 @@
+﻿form {
+    padding: 10px;
+}
+
+.info-wraper {
+    margin-top: 10px;
+    margin-left : 10px;
+    padding: 10px;
+    border: 1px solid #B17C7C;
+    border-radius: 20px;
+    width: 98%;
+}
+
+.text-input {
+    display : flex;
+    align-items : center;
+}
+.text-input-label {
+    margin-right: 10px;
+}
+.text-input textarea {
+    width: 100%;
+    min-height: 65px;
+    
+    border-radius: 10px;
+    resize: vertical;
+    padding: 5px;
+    border-width: 1px;
+    border-color: #B17C7C;
+    background-color: #C0A5A5;
+}
+
+
+
+.answers-input {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.answers-input textarea {
+    width : 100%;
+    min-height : 65px;
+    resize : vertical;
+    height: 200px;
+    border-radius: 10px;
+    padding: 5px;
+    border-width: 1px;
+    border-color: #B17C7C;
+    background-color: #C0A5A5;
+}
+
+
+.button1 {
+    display: block;
+    border: 1px solid black;
+    padding: 20px 10px 20px 10px;
+    text-decoration: none;
+    color: black;
+    background-color: #C0A5A5;
+}
+.button1:hover {
+    background-color: #B17C7C;
+    border-color: black;
+}
+
+.button2 {
+    display: block;
+    width: 200px;
+    border: 1px solid black;
+    padding: 20px 10px 20px 10px;
+    text-decoration: none;
+    color: black;
+    border-radius : 20px;
+    background-color: #C0A5A5;
+}
+.button2:hover {
+    background-color: #B17C7C;
+    border-color: black;
+}
