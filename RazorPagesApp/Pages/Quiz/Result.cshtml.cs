@@ -20,7 +20,6 @@ namespace RazorPagesApp.Pages.Quiz
         public ResultModel(IHttpContextAccessor accessor, IUserCRUD saver, IQuestionHandler questions)
         {
             var httpContext = accessor.HttpContext;
-
             User = httpContext.Session.Get<User>("user");
             Progress = httpContext.Session.Get<UserProgress>("progress");
             Questions = questions;

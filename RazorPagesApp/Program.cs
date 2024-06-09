@@ -22,6 +22,7 @@ builder.Services.AddRazorPages();             // Add razor pages in apllication
 
 var app = builder.Build();
 
+app.UseDeveloperExceptionPage();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseSession();    // Use sessia
