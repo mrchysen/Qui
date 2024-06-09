@@ -41,10 +41,13 @@ namespace RazorPagesApp.Pages.Administration
         {
             IExcelService excelGen = new ExcelGenerator();
 
-            excelGen.CreateExcelFile(UserHandler.GetUsers());
-            Console.WriteLine("װאיכ סמחהאם");
-
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.xlsx");
+            
+            excelGen.CreateExcelFile(UserHandler.GetUsers(), path);
+            Console.WriteLine("װאיכ סמחהאם");
+            //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.xlsx")
+
+
             Console.WriteLine();
 
             return PhysicalFile(path, "application/excel", "results.xlsx");

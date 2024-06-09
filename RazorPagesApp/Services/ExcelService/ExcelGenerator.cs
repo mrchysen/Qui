@@ -15,7 +15,7 @@ public class ExcelGenerator : IExcelService
 
     public ExcelGenerator() { }
 
-    public bool CreateExcelFile(List<User> users)
+    public bool CreateExcelFile(List<User> users, string path)
     {
         try
         {
@@ -30,8 +30,8 @@ public class ExcelGenerator : IExcelService
             WriteAllUser(worksheet, users);
 
             worksheet.Columns(1,10 + MaxQuestions * 5).AdjustToContents();
-
-            workbook.SaveAs(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.xlsx"));
+            
+            workbook.SaveAs(path);
         }
         catch (Exception ex)
         {
