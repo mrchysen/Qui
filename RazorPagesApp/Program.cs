@@ -32,14 +32,6 @@ app.MapRazorPages(); // Routing for razor pages
 app.UseMiddleware<AuntificationMiddelware>();
 app.UseMiddleware<AdministrationControlMiddelware>();
 
-Console.WriteLine("Запуск приложения");
+Console.WriteLine("Running application...");
 
-try
-{
-    app.Run();  
-}
-catch(Exception ex)
-{
-    string path = AppDomain.CurrentDomain.BaseDirectory;
-    File.AppendAllText(Path.Combine(path, "error.log"),$"{ex.Message}\n{ex.StackTrace}");
-}
+app.Run();  
