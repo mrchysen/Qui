@@ -25,7 +25,7 @@ form textarea::placeholder {
 .button-wrapper {
     margin-top : 10px;
     display : flex;
-    height : 45px;
+    height : 65px;
 }
 
 .button-box {

@@ -12,7 +12,6 @@ namespace RazorPagesApp.Pages.Quiz
         public User User { get; protected set; }
         public UserProgress Progress { get; protected set; }
         public IQuestionHandler Questions { get; protected set; }
-        public string ResultText => $"Вы ответили на {RightAnswers} вопрос{QueestionText()} правильно.";
 
         public int RightAnswers = 0;
 
