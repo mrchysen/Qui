@@ -73,9 +73,12 @@ public class AppDbContext : DbContext, IQuestionsBD, IUserCRUD, IAdminRegistrati
     #endregion
 
     #region IUserCRUD
-    public async void SaveUser(User user)
+    public void SaveUser(User user)
     {
-        await Users.AddAsync(user);
+        if(Users.Contains(user))
+            Users.Update(user);
+        else
+            Users.Add(user);
 
         SaveChanges();
     }
