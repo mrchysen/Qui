@@ -48,6 +48,7 @@ namespace RazorPagesApp.Pages.Quiz
         protected void SaveResultAndResetSession()
         {
             User.Progress = Progress;
+            User.Progress.Id = Guid.NewGuid();
             User.Progress.CountRightAnswers(Questions);
             Console.WriteLine("Added Progress to user");
 

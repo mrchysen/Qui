@@ -77,6 +77,8 @@ public class AppDbContext : DbContext, IQuestionsBD, IUserCRUD, IAdminRegistrati
     {
         Users.Add(user);
 
+        Console.WriteLine(user.Id);
+
         SaveChanges();
     }
 
