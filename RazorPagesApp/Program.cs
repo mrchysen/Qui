@@ -32,6 +32,8 @@ app.MapRazorPages(); // Routing for razor pages
 app.UseMiddleware<AuntificationMiddelware>();
 app.UseMiddleware<AdministrationControlMiddelware>();
 
+Console.WriteLine("Запуск приложения");
+
 try
 {
     app.Run();  
