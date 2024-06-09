@@ -75,10 +75,7 @@ public class AppDbContext : DbContext, IQuestionsBD, IUserCRUD, IAdminRegistrati
     #region IUserCRUD
     public void SaveUser(User user)
     {
-        if(Users.Contains(user))
-            Users.Update(user);
-        else
-            Users.Add(user);
+        Users.Add(user);
 
         SaveChanges();
     }
