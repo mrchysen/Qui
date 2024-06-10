@@ -18,7 +18,7 @@ public class AppDbContext : DbContext, IQuestionsBD, IUserCRUD, IAdminRegistrati
 
         stratRegistrations = AdminData.GetSection("AdminStartData").Get<List<Registration>>();
         
-        Database.EnsureCreated();
+        // Database.EnsureCreated();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
