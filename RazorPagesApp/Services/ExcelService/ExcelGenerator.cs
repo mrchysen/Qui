@@ -11,33 +11,35 @@ namespace RazorPagesApp.Services.ExcelService;
 /// </summary>
 public class ExcelGenerator : IExcelService
 {
-    protected int MaxQuestions;
+    protected int MaxQuestions = 0;
 
     public ExcelGenerator() { }
 
     public bool CreateExcelFile(List<User> users, string path)
     {
+        using var workbook = new XLWorkbook();
+
+        var worksheet = workbook.AddWorksheet("Лист1");
+
         try
         {
-            using var workbook = new XLWorkbook();
-
-            var worksheet = workbook.AddWorksheet("Лист1");
-            
-            if(users.Count > 0)
+            if(users != null)
+            {
                 MaxQuestions = users.Max((user) => user.Progress.Answers.Count);
-
-            GenerateHeader(worksheet, users);
-            WriteAllUser(worksheet, users);
+            
+                GenerateHeader(worksheet, users);
+                WriteAllUser(worksheet, users);
+            }
 
             worksheet.Columns(1,10 + MaxQuestions * 5).AdjustToContents();
-            
-            workbook.SaveAs(path);
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
             return false;
         }
+
+        workbook.SaveAs(path);
 
         return true;
     }
