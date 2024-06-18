@@ -22,6 +22,7 @@ namespace RazorPagesApp.Pages.Administration
 
             Questions.CreateQuestion(new Question()
             {
+                Id = Guid.NewGuid(),
                 Text = text,
                 Answers = answers
             });

@@ -18,7 +18,7 @@ public class AppDbContext : DbContext, IQuestionsBD, IUserCRUD, IAdminRegistrati
 
         stratRegistrations = AdminData.GetSection("AdminStartData").Get<List<Registration>>();
         
-        Database.EnsureCreated();
+        // Database.EnsureCreated();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -75,10 +75,9 @@ public class AppDbContext : DbContext, IQuestionsBD, IUserCRUD, IAdminRegistrati
     #region IUserCRUD
     public void SaveUser(User user)
     {
-        if(Users.Contains(user))
-            Users.Update(user);
-        else
-            Users.Add(user);
+        Users.Add(user);
+
+        Console.WriteLine(user.Id);
 
         SaveChanges();
     }

@@ -4,6 +4,6 @@ namespace RazorPagesApp.Services.ExcelService;
 
 public interface IExcelService
 {
-    public bool CreateExcelFile(List<User> users);
+    public bool CreateExcelFile(List<User> users, string path);
 
 }

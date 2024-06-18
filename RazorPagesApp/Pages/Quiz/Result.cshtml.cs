@@ -40,11 +40,12 @@ namespace RazorPagesApp.Pages.Quiz
         protected void SaveResultAndResetSession()
         {
             User.Progress = Progress;
+            User.Progress.Id = Guid.NewGuid();
             User.Progress.CountRightAnswers(Questions);
 
             Saver.SaveUser(User);
 
-            if(HttpContext.Session.GetString("authentication") != "admin")
+            if (HttpContext.Session.GetString("authentication") != "admin")
             {
                 HttpContext.Session.Clear();
             }
