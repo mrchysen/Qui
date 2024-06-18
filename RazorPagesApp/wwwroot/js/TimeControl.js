@@ -15,7 +15,7 @@ function SaveEndTime() {
     TimeEndInput.value = CreateDateTimeString(new Date(Date.now()));
 }
 function CreateDateTimeString(date) {
-    return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()},${date.getMilliseconds()}`;
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()},${date.getMilliseconds()}`;
 }
 
 SaveStartTime();

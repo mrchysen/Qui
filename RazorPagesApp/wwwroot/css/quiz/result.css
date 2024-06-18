@@ -44,6 +44,10 @@ table {
     border-collapse: collapse;
 }
 
+.table-wrapper {
+    overflow-y: auto;
+}
+
 .head {
     background-color: #C0A5A5;
 }

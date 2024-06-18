@@ -14,23 +14,27 @@
     </section>
     
     <hr class="line"/>
-    <table>
-        <tr>
-            <td class="head text-style">Номер</td>
-            <td class="head text-style">Вопрос</td>
-            <td class="head text-style">Ответ</td>
-            <td class="head text-style">Правильность</td>
-        </tr>
-        @for (int i = 0; i < Model.Progress.Answers.Count; i++)
-        {
+    <div class="table-wrapper">
+        <table>
             <tr>
-                <td class="text-centre text-style">@(i + 1)</td>
-                <td class="text-style">@Model.Questions[i].Text</td>
-                <td class="text-style">@Model.Progress.Answers[i]</td>
-                <td class="text-style">@(Model.Questions[i].IsAnswer(Model.Progress.Answers[i]) ? "Правильно" : "Неправильно")</td>
+                <td class="head text-style">Номер</td>
+                <td class="head text-style">Вопрос</td>
+                <td class="head text-style">Ответ</td>
+                <td class="head text-style">Правильность</td>
             </tr>
-        }
-    </table>
+            @for (int i = 0; i < Model.Progress.Answers.Count; i++)
+            {
+                <tr>
+                    <td class="text-centre text-style">@(i + 1)</td>
+                    <td class="text-style">@Model.Questions[i].Text</td>
+                    <td class="text-style">@Model.Progress.Answers[i]</td>
+                    <td class="text-style">@(Model.Questions[i].IsAnswer(Model.Progress.Answers[i]) ? "Правильно" : "Неправильно")</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    
 
     <hr class="line" />
 
