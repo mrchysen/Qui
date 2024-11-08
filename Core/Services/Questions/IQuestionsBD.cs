@@ -1,6 +1,6 @@
-﻿using RazorPagesApp.Models;
+﻿using Core.Models;
 
-namespace RazorPagesApp.Services.Questions;
+namespace Core.Services.Questions;
 
 public interface IQuestionsBD
 {

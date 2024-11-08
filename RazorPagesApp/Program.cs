@@ -1,7 +1,7 @@
+using Core.Services.Authorization;
+using Core.Services.Questions;
 using EFLearning;
 using RazorPagesApp.Middelwares;
-using RazorPagesApp.Models;
-using RazorPagesApp.Services.Authorization;
 using RazorPagesApp.Services.Progress;
 using RazorPagesApp.Services.Questions;
 

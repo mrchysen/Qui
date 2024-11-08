@@ -1,4 +1,4 @@
-﻿using RazorPagesApp.Models;
+﻿using Core.Models;
 
 namespace RazorPagesApp.Middelwares;
 

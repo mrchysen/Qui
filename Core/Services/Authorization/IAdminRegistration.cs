@@ -1,6 +1,6 @@
-﻿using RazorPagesApp.Models;
+﻿using Core.Models;
 
-namespace RazorPagesApp.Services.Authorization;
+namespace Core.Services.Authorization;
 
 public interface IAdminRegistration
 {

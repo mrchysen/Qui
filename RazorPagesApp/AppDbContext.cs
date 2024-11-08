@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RazorPagesApp.Models;
-using RazorPagesApp.Services.Authorization;
+﻿using Core.Models;
+using Core.Services.Authorization;
+using Core.Services.Questions;
+using Microsoft.EntityFrameworkCore;
 using RazorPagesApp.Services.Progress;
-using RazorPagesApp.Services.Questions;
 
 namespace EFLearning;
 

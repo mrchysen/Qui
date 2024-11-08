@@ -1,19 +1,17 @@
 ﻿using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Office2016.Excel;
-using DocumentFormat.OpenXml.Spreadsheet;
-using RazorPagesApp.Models;
+using Core.Models;
 
-namespace RazorPagesApp.Services.ExcelService;
+namespace Application.ExcelService;
 
+public interface IExcelService
+{
+    public bool CreateExcelFile(List<User> users, string path);
 
-/// <summary>
-/// Класс для генерации ексель файлов
-/// </summary>
+}
+
 public class ExcelGenerator : IExcelService
 {
     protected int MaxQuestions = 0;
-
-    public ExcelGenerator() { }
 
     public bool CreateExcelFile(List<User> users, string path)
     {
@@ -23,15 +21,15 @@ public class ExcelGenerator : IExcelService
 
         try
         {
-            if(users != null)
+            if (users != null)
             {
                 MaxQuestions = users.Max((user) => user.Progress.Answers.Count);
-            
+
                 GenerateHeader(worksheet, users);
                 WriteAllUser(worksheet, users);
             }
 
-            worksheet.Columns(1,10 + MaxQuestions * 5).AdjustToContents();
+            worksheet.Columns(1, 10 + MaxQuestions * 5).AdjustToContents();
         }
         catch (Exception ex)
         {
@@ -78,7 +76,7 @@ public class ExcelGenerator : IExcelService
         AddCellValue(sheet, i + 3, 6 + MaxQuestions * 5, user.Progress.RightAnswers.ToString());
         AddCellValue(sheet, i + 3, 6 + MaxQuestions * 5 + 1, user.Progress.Answers.Count.ToString());
         AddCellValue(sheet, i + 3, 6 + MaxQuestions * 5 + 2, user.Progress.WasSearched.Select(e => e ? 1 : 0).Sum().ToString());
-        
+
         TimeSpan timeSpan = new(0, 0, 0);
 
         if (user.Progress.AnswerStartDateTime.Count > 0 && user.Progress.AnswerEndDateTime.Count > 0)
@@ -115,7 +113,7 @@ public class ExcelGenerator : IExcelService
         SimpleHeaderPart(sheet, 4, 1, "Пол");
         SimpleHeaderPart(sheet, 5, 1, "Возраст");
 
-        
+
         for (int i = 0; i < MaxQuestions; i++)
         {
             QuestionCellGenerate(sheet, i);
@@ -152,10 +150,10 @@ public class ExcelGenerator : IExcelService
         sheet.Range(1, cell, 1, cell + 4).Merge();
 
         AddQuestionBottomCell(sheet, "ответ", cell);
-        AddQuestionBottomCell(sheet, "нач. время", cell+1);
-        AddQuestionBottomCell(sheet, "кон. время", cell+2);
-        AddQuestionBottomCell(sheet, "правильность", cell+3);
-        AddQuestionBottomCell(sheet, "поиск в интенете", cell+4);
+        AddQuestionBottomCell(sheet, "нач. время", cell + 1);
+        AddQuestionBottomCell(sheet, "кон. время", cell + 2);
+        AddQuestionBottomCell(sheet, "правильность", cell + 3);
+        AddQuestionBottomCell(sheet, "поиск в интенете", cell + 4);
     }
 
     protected void AddQuestionBottomCell(IXLWorksheet sheet, string title, int cell)
@@ -177,10 +175,10 @@ public class ExcelGenerator : IExcelService
         sheet.Cell(CellRow, CellColumn).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
         sheet.Cell(CellRow, CellColumn).Style.Border.RightBorder = XLBorderStyleValues.Medium;
         sheet.Cell(CellRow, CellColumn).Style.Border.RightBorderColor = XLColor.Black;
-        sheet.Cell(CellRow+1, CellColumn).Style.Border.RightBorder = XLBorderStyleValues.Medium;
-        sheet.Cell(CellRow+1, CellColumn).Style.Border.RightBorderColor = XLColor.Black;
-        sheet.Cell(CellRow+1, CellColumn).Style.Border.BottomBorder = XLBorderStyleValues.Medium;
-        sheet.Cell(CellRow+1, CellColumn).Style.Border.BottomBorderColor = XLColor.Black;
+        sheet.Cell(CellRow + 1, CellColumn).Style.Border.RightBorder = XLBorderStyleValues.Medium;
+        sheet.Cell(CellRow + 1, CellColumn).Style.Border.RightBorderColor = XLColor.Black;
+        sheet.Cell(CellRow + 1, CellColumn).Style.Border.BottomBorder = XLBorderStyleValues.Medium;
+        sheet.Cell(CellRow + 1, CellColumn).Style.Border.BottomBorderColor = XLColor.Black;
         sheet.Range(CellRow, CellColumn, CellRow + 1, CellColumn).Merge();
     }
 }

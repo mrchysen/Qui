@@ -1,8 +1,8 @@
-﻿using RazorPagesApp.Models;
+﻿using Core.Extensions;
+using Core.Models;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using RazorPagesApp.Extensions;
 
 namespace RazorPagesApp.Services.Progress;
 
@@ -14,7 +14,6 @@ public class UserHandler : IUserCRUD
 {
     public string FilePath { get; set; } = Path.Combine(AppContext.BaseDirectory, "Progress.txt");
 
-    
     public void SaveUser(User user)
     {
         using (StreamWriter sw = new(FilePath, true, System.Text.Encoding.UTF8))

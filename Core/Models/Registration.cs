@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RazorPagesApp.Models;
+namespace Core.Models;
 
 public class Registration
 {
@@ -11,8 +11,11 @@ public class Registration
 
     public override bool Equals(object? obj)
     {
-        if(obj is  Registration r) 
+        if (obj is Registration r)
             return r.Login == Login && r.Password == Password;
         return base.Equals(obj);
     }
+
+    public override int GetHashCode()
+        => Login.GetHashCode() ^ Password.GetHashCode();
 }

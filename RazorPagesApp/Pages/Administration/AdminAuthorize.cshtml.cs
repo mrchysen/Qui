@@ -1,7 +1,7 @@
+using Core.Models;
+using Core.Services.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Models;
-using RazorPagesApp.Services.Authorization;
 
 namespace RazorPagesApp.Pages.Administration
 {

@@ -1,6 +1,6 @@
+using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Models;
 using RazorPagesApp.Extensions;
 
 namespace RazorPagesApp.Pages.Quiz;

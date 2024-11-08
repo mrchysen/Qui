@@ -1,60 +1,59 @@
+using Core.Models;
+using Core.Services.Questions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Models;
 using RazorPagesApp.Extensions;
-using RazorPagesApp.Services.Questions;
 using RazorPagesApp.Services.Progress;
 
-namespace RazorPagesApp.Pages.Quiz
+namespace RazorPagesApp.Pages.Quiz;
+
+public class ResultModel : PageModel
 {
-    public class ResultModel : PageModel
+    public User User { get; protected set; }
+    public UserProgress Progress { get; protected set; }
+    public IQuestionHandler Questions { get; protected set; }
+
+    public int RightAnswers = 0;
+
+    protected IUserCRUD Saver;
+
+    public ResultModel(IHttpContextAccessor accessor, IUserCRUD saver, IQuestionHandler questions)
     {
-        public User User { get; protected set; }
-        public UserProgress Progress { get; protected set; }
-        public IQuestionHandler Questions { get; protected set; }
+        var httpContext = accessor.HttpContext;
 
-        public int RightAnswers = 0;
+        User = httpContext.Session.Get<User>("user");
+        Progress = httpContext.Session.Get<UserProgress>("progress");
+        Questions = questions;
 
-        protected IUserCRUD Saver;
+        Saver = saver;
 
-        public ResultModel(IHttpContextAccessor accessor, IUserCRUD saver, IQuestionHandler questions)
+        RightAnswers = Progress.CountRightAnswers(Questions);
+    }
+
+    public IActionResult OnGet()
+    {
+        SaveResultAndResetSession();
+
+        return Page();
+    }
+
+    protected void SaveResultAndResetSession()
+    {
+        User.Progress = Progress;
+        User.Progress.Id = Guid.NewGuid();
+        User.Progress.CountRightAnswers(Questions);
+
+        Saver.SaveUser(User);
+
+        if (HttpContext.Session.GetString("authentication") != "admin")
         {
-            var httpContext = accessor.HttpContext;
-
-            User = httpContext.Session.Get<User>("user");
-            Progress = httpContext.Session.Get<UserProgress>("progress");
-            Questions = questions;
-
-            Saver = saver;
-
-            RightAnswers = Progress.CountRightAnswers(Questions);
+            HttpContext.Session.Clear();
         }
-
-        public IActionResult OnGet()
-        {
-            SaveResultAndResetSession();
-
-            return Page();
-        }
-
-        protected void SaveResultAndResetSession()
-        {
-            User.Progress = Progress;
-            User.Progress.Id = Guid.NewGuid();
-            User.Progress.CountRightAnswers(Questions);
-
-            Saver.SaveUser(User);
-
-            if (HttpContext.Session.GetString("authentication") != "admin")
-            {
-                HttpContext.Session.Clear();
-            }
-        }
-        protected string QueestionText()
-        {
-            if (RightAnswers % 10 == 1) return "";
-            if (RightAnswers % 10 > 1 && RightAnswers % 10 < 5) return "a";
-            return "ов";
-        }
+    }
+    protected string QueestionText()
+    {
+        if (RightAnswers % 10 == 1) return "";
+        if (RightAnswers % 10 > 1 && RightAnswers % 10 < 5) return "a";
+        return "ов";
     }
 }

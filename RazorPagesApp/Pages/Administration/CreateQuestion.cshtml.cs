@@ -1,7 +1,7 @@
+using Core.Models;
+using Core.Services.Questions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Models;
-using RazorPagesApp.Services.Questions;
 
 namespace RazorPagesApp.Pages.Administration
 {

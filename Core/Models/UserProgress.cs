@@ -1,8 +1,7 @@
-﻿using RazorPagesApp.Services.Questions;
-using System;
+﻿using Core.Services.Questions;
 using System.ComponentModel.DataAnnotations;
 
-namespace RazorPagesApp.Models;
+namespace Core.Models;
 
 public class UserProgress
 {
@@ -25,7 +24,7 @@ public class UserProgress
         {
             if (questions[i].IsAnswer(Answers[i]))
             {
-                RightAnswers+=1;
+                RightAnswers += 1;
             }
         }
 

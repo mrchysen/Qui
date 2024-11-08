@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RazorPagesApp.Models;
+namespace Core.Models;
 
 public class Question
 {
     [Key]
     public Guid Id { get; set; }
-    public string Text { get; set; } = String.Empty;
+    public string Text { get; set; } = string.Empty;
     public List<string> Answers { get; set; } = new List<string>();
     public int Order { get; set; } = 0;
 

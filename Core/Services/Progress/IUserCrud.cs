@@ -1,5 +1,4 @@
-﻿using RazorPagesApp.Models;
-using RazorPagesApp.Services.Questions;
+﻿using Core.Models;
 
 namespace RazorPagesApp.Services.Progress;
 
