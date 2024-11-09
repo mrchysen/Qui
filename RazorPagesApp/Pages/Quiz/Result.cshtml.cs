@@ -15,9 +15,9 @@ public class ResultModel : PageModel
 
     public int RightAnswers = 0;
 
-    protected IUserCRUD Saver;
+    protected IUserRepository Saver;
 
-    public ResultModel(IHttpContextAccessor accessor, IUserCRUD saver, IQuestionHandler questions)
+    public ResultModel(IHttpContextAccessor accessor, IUserRepository saver, IQuestionHandler questions)
     {
         var httpContext = accessor.HttpContext;
 

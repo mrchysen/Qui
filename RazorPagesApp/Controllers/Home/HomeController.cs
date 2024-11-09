@@ -10,7 +10,7 @@ public class HomeController : Controller
     private ISession _session => HttpContext.Session;
 
     [HttpGet("")]
-    public IActionResult Index() => View("Home");
+    public IActionResult Index() => View("Auth");
 
     [HttpGet("Instruction")]
     public IActionResult Instruction() => View("Instruction");

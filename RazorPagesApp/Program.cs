@@ -1,19 +1,17 @@
 using Core.Services.Authorization;
 using Core.Services.Questions;
-using EFLearning;
+using DAL;
+using Microsoft.EntityFrameworkCore;
 using RazorPagesApp.Middelwares;
 using RazorPagesApp.Services.Progress;
 using RazorPagesApp.Services.Questions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var bd = new AppDbContext(builder.Configuration);
-var questionHandler = new QuestionService(bd);
 
-builder.Services.AddSingleton<IQuestionHandler>(questionHandler);
-builder.Services.AddSingleton<IAdminRegistration>(bd);
-builder.Services.AddSingleton<IUserCRUD>(bd);
-builder.Services.AddSingleton<IQuestionsBD>(bd);
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite());
+
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddHttpContextAccessor();    // Enable use HttpContext in constructors
 builder.Services.AddDistributedMemoryCache(); // Add caching

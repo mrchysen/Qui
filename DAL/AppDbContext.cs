@@ -2,11 +2,12 @@
 using Core.Services.Authorization;
 using Core.Services.Questions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using RazorPagesApp.Services.Progress;
 
-namespace EFLearning;
+namespace DAL;
 
-public class AppDbContext : DbContext, IQuestionsBD, IUserCRUD, IAdminRegistration
+public class AppDbContext : DbContext, IQuestionRespository, IUserRepository, IAdminRegistration
 {
     private const string ConnectionString =
         @"Data Source=ApplicationDB.db;";
@@ -17,7 +18,7 @@ public class AppDbContext : DbContext, IQuestionsBD, IUserCRUD, IAdminRegistrati
         //Database.EnsureDeleted();
 
         stratRegistrations = AdminData.GetSection("AdminStartData").Get<List<Registration>>();
-        
+
         // Database.EnsureCreated();
     }
 
@@ -60,7 +61,7 @@ public class AppDbContext : DbContext, IQuestionsBD, IUserCRUD, IAdminRegistrati
     public async void SaveQuestions(List<Question> questions)
     {
         Questions.ExecuteDelete();
-        
+
         await Questions.AddRangeAsync(questions);
 
         await SaveChangesAsync();
@@ -86,11 +87,11 @@ public class AppDbContext : DbContext, IQuestionsBD, IUserCRUD, IAdminRegistrati
     {
         return Users.Include(user => user.Progress).ToList();
     }
-    public User GetUser(Guid id) 
-    { 
+    public User GetUser(Guid id)
+    {
         var user = Users.Include(user => user.Progress).Where(user => user.Id.Equals(id)).First();
 
-        if(user == null)
+        if (user == null)
         {
             return new User()
             {

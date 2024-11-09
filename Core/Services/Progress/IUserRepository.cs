@@ -2,7 +2,7 @@
 
 namespace RazorPagesApp.Services.Progress;
 
-public interface IUserCRUD
+public interface IUserRepository
 {
     public void SaveUser(User user);
     public List<User> GetUsers();

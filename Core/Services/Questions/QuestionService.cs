@@ -4,12 +4,12 @@ namespace RazorPagesApp.Services.Questions;
 public class QuestionService : IQuestionHandler
 {
     protected List<Question> Questions { get; set; } = new();
-    protected IQuestionsBD Bd { get; set; }
+    protected IQuestionRespository Bd { get; set; }
 
     public int Count => Questions.Count;
     public Question this[int index] => Questions[index];
 
-    public QuestionService(IQuestionsBD bd)
+    public QuestionService(IQuestionRespository bd)
     {
         Questions = bd.GetQuestions();
         Bd = bd;

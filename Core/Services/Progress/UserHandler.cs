@@ -10,7 +10,7 @@ namespace RazorPagesApp.Services.Progress;
 /// Простой сервис для сохранения результатов в файлик
 /// использовался для тестов
 /// </summary>
-public class UserHandler : IUserCRUD
+public class UserHandler : IUserRepository
 {
     public string FilePath { get; set; } = Path.Combine(AppContext.BaseDirectory, "Progress.txt");
 

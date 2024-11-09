@@ -2,7 +2,7 @@
 
 namespace Core.Services.Questions;
 
-public interface IQuestionsBD
+public interface IQuestionRespository
 {
     public void SaveQuestions(List<Question> questions);
     public List<Question> GetQuestions();

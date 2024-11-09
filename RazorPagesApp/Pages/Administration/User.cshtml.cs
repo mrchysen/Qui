@@ -7,9 +7,9 @@ namespace RazorPagesApp.Pages.Administration;
 
 public class UserModel : PageModel
 {
-    protected IUserCRUD UserHandler;
+    protected IUserRepository UserHandler;
     public User User;
-    public UserModel(IUserCRUD userDb) 
+    public UserModel(IUserRepository userDb) 
     { 
         UserHandler = userDb;
     }

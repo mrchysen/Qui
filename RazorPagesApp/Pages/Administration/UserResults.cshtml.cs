@@ -10,10 +10,10 @@ namespace RazorPagesApp.Pages.Administration;
 
 public class UserResultsModel : PageModel
 {
-    public IUserCRUD UserHandler;
+    public IUserRepository UserHandler;
     public List<User> Users;
 
-    public UserResultsModel(IUserCRUD users, IQuestionHandler questions) 
+    public UserResultsModel(IUserRepository users, IQuestionHandler questions) 
     {
         UserHandler = users;
         Users = UserHandler.GetUsers();
