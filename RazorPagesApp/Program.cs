@@ -18,7 +18,7 @@ builder.Services.AddSingleton<IQuestionsBD>(bd);
 builder.Services.AddHttpContextAccessor();    // Enable use HttpContext in constructors
 builder.Services.AddDistributedMemoryCache(); // Add caching
 builder.Services.AddSession();                // Add sessions
-builder.Services.AddRazorPages();             // Add razor pages in apllication
+builder.Services.AddControllersWithViews();   // Add controllers pages in application
 
 var app = builder.Build();
 
@@ -26,10 +26,10 @@ app.UseDeveloperExceptionPage();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseSession();    // Use sessia
-app.MapRazorPages(); // Routing for razor pages
+app.MapControllers(); // Routing for razor pages
 
 // Custom Middelwares \\
-app.UseMiddleware<AuntificationMiddelware>();
+//app.UseMiddleware<AuntificationMiddelware>();
 app.UseMiddleware<AdministrationControlMiddelware>();
 
 app.Run();  

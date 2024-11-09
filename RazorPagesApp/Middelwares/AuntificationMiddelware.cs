@@ -11,6 +11,9 @@ public class AuntificationMiddelware
 {
     protected readonly RequestDelegate next;
 
+    public const string AuthPath = "/";
+    public const string AdminAuthPath = "/Administration/AdminAuthorize";
+
     public AuntificationMiddelware(RequestDelegate next)
     {
         this.next = next;
@@ -21,7 +24,7 @@ public class AuntificationMiddelware
         if (IsAuthenticationRedirection(context))
         {
             context.Session.SetString("authentication", "start");
-            context.Response.Redirect("/Quiz/authentication");
+            context.Response.Redirect(AuthPath);
         }
         else
         {
@@ -35,15 +38,15 @@ public class AuntificationMiddelware
         if (!context.Session.Keys.Contains("authentication"))
             return true;
 
-        AuthenticationType = context.Session.GetString("authentication");
+        AuthenticationType = context.Session.GetString("authentication")!;
 
-        if (context.Request.Path == "/Administration/AdminAuthorize")
+        if (context.Request.Path == AdminAuthPath)
             return false;
 
         if(AuthenticationType == "end" || AuthenticationType == "admin")
             return false;
 
-        if (AuthenticationType == "start" && context.Request.Path == "/Quiz/authentication")
+        if (AuthenticationType == "start" && context.Request.Path == AuthPath)
             return false;
 
         return true;

@@ -1,5 +1,5 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model RazorPagesApp.Pages.Quiz.AuthenticationModel
+﻿@model Core.Models.User
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Регистрация";
     ViewData["css"] = "quiz/authentication.css";
@@ -14,43 +14,43 @@
             поэтому просим внимательно ознакомиться с инструкцией и следовать ей.
         </div>
     </div>
-    
+
     <div class="form-wrapper">
         <p class="form-container__info text-style bold-text">
             О Вас
         </p>
-        <form method="post" asp-page="Authentication" asp-page-handler="Authorize">
+        <form method="post" asp-controller="Home" asp-action="CreateQuizSession">
             <div class="input-box text-style">
                 <label>
-                        Фамилия
+                    Фамилия
                 </label>
-                <input class="text-input" type="text" required asp-for="User.Sername" />
+                <input class="text-input" type="text" asp-for="Sername" required />
             </div>
             <div class="input-box text-style">
                 <label>
                     Имя
                 </label>
-                <input class="text-input" type="text" required asp-for="User.Name" />
+                <input class="text-input" type="text" asp-for="Name" required />
             </div>
             <div class="input-box text-style">
                 <label>
                     Отчество
                 </label>
-               <input class="text-input" type="text" asp-for="User.FatherName" placeholder="необязательно"/>
+                <input class="text-input" type="text" asp-for="FatherName" placeholder="необязательно" />
             </div>
             <div class="input-box text-style">
                 <label>
                     Возраст
                 </label>
-                <input class="text-input" type="number" required value="18" asp-for="User.Age" />
+                <input class="text-input" type="number" asp-for="Age" required value="18" />
             </div>
             <div class="radio-box text-style">
                 <input class="radio-button-input" id="male" type="radio" name="Sex" checked value="0" />
                 <label class="radio-button-label" for="male">Мужчина</label>
                 <input class="radio-button-input" id="female" type="radio" name="Sex" value="1" />
                 <label class="radio-button-label" for="female">Женщина</label>
-                
-             </div>
+
+            </div>
             <div class="button-wrapper">
                 <input class="submit-input" type="submit" value="Отправить" />
             </div>
