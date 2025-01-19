@@ -1,7 +1,7 @@
-﻿using Core.Services.Questions;
+﻿using Core.Questions.QuestionServices;
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Models;
+namespace Core.UserProgressFeatures;
 
 public class UserProgress
 {

@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Application\QuiApp.Application.csproj" />
+    <ProjectReference Include="..\Core\QuiApp.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,12 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ApplicationDB.db-shm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\img\" />
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
@@ -39,9 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Core\Core.csproj" />
-    <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\Application\QuiApp.Application.csproj" />
+    <ProjectReference Include="..\Core\QuiApp.Core.csproj" />
+    <ProjectReference Include="..\DAL\QuiApp.DAL.csproj" />
   </ItemGroup>
 
 </Project>

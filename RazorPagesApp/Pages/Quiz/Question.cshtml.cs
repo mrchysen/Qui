@@ -1,5 +1,6 @@
-using Core.Models;
-using Core.Services.Questions;
+using Core.Questions;
+using Core.Questions.QuestionServices;
+using Core.UserProgressFeatures;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesApp.Extensions;

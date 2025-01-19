@@ -1,0 +1,36 @@
+﻿@using QuiApp.WebMVC.Controllers.Questions.Models
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model QuestionDto
+
+@{
+    ViewData["Title"] = "Создание вопроса";
+    ViewData["css"] = "administration/question.css";
+}
+
+<main>
+    <a class="button1 text-style" href="@Url.Action("List", "Questions")"><i class='bx bx-chevron-left'></i>Отмена</a>
+
+    <div class="info-wraper text-style">
+        <i class='bx bx-info-circle'></i>
+        Поля можно растянуть вниз. Ответы добавляются через enter.
+    </div>
+
+    <form method="post" asp-action="create" asp-controller="questions">
+        <div class="text-input text-style">
+            <lable class="text-input-label" for="text">
+                Вопрос
+            </lable>
+            <textarea class="text-style" id="text" asp-for="Text" required name="text" rows="2" placeholder="Вопрос?"></textarea>
+        </div>
+
+        <div class="answers-input text-style">
+            <lable class="text-input-label" for="answers">
+                Ответы
+            </lable>
+            <textarea class="text-style" id="answers" asp-for="Answers" required name="answers" rows="10" placeholder="Ответы"></textarea>
+        </div>
+
+        <input class="button2 text-style" type="submit" value="Добавить" />
+    </form>
+</main>

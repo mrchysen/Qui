@@ -1,4 +1,4 @@
-using Core.Services.Questions;
+using Core.Questions.QuestionServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

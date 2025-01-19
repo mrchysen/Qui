@@ -1,9 +1,10 @@
-using Core.Models;
-using Core.Services.Questions;
+using Core.Questions.QuestionServices;
+using Core.UserProgressFeatures;
+using Core.Users;
+using Core.Users.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesApp.Extensions;
-using RazorPagesApp.Services.Progress;
 
 namespace RazorPagesApp.Pages.Quiz;
 

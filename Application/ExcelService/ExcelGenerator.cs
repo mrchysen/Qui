@@ -1,5 +1,5 @@
 ﻿using ClosedXML.Excel;
-using Core.Models;
+using Core.Users;
 
 namespace Application.ExcelService;
 

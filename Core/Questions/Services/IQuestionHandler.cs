@@ -1,6 +1,5 @@
-﻿using Core.Models;
+﻿namespace Core.Questions.QuestionServices;
 
-namespace Core.Services.Questions;
 public interface IQuestionHandler
 {
     public int Count { get; }

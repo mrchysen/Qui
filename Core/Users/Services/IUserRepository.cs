@@ -1,6 +1,6 @@
-﻿using Core.Models;
+﻿using Core.Users;
 
-namespace RazorPagesApp.Services.Progress;
+namespace Core.Users.Services;
 
 public interface IUserRepository
 {

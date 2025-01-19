@@ -1,5 +1,5 @@
-using Core.Models;
-using Core.Services.Authorization;
+using Core.AdminAccess;
+using Core.AdminAccess.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,17 +7,17 @@ namespace RazorPagesApp.Pages.Administration
 {
     public class AdminAuthorizeModel : PageModel
     {
-        protected IAdminRegistration Registrator { get; set; }
+        protected IAdminRegistrationService Registrator { get; set; }
         public string Info { get; set; } = "";
 
-        public AdminAuthorizeModel(IAdminRegistration registrator) 
+        public AdminAuthorizeModel(IAdminRegistrationService registrator) 
         {
             Registrator = registrator;
         }
 
-        public IActionResult OnPost(Registration registration) 
+        public async Task<IActionResult> OnPost(AdminRegistration registration)
         {
-            if (Registrator.IsAdmin(registration))
+            if (await Registrator.IsAdmin(registration))
             {
                 HttpContext.Session.SetString("authentication", "admin");
 

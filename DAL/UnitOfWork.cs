@@ -1,5 +1,5 @@
-﻿using Core.Services.Questions;
-using RazorPagesApp.Services.Progress;
+﻿using Core.Questions.QuestionServices;
+using Core.Users.Services;
 
 namespace DAL;
 
@@ -9,12 +9,11 @@ public interface IUnitOfWork : IDisposable
     public IQuestionRespository QuestionRespository { get; }
 }
 
-public class UnitOfWork : IUnitOfWork
+public class UnitOfWork
 {
     private readonly AppDbContext _context;
 
     public IUserRepository UserRepository => _context;
-    public IQuestionRespository QuestionRespository => _context;
 
     public UnitOfWork(AppDbContext context)
     {

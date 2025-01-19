@@ -1,7 +1,7 @@
-using Core.Models;
+using Core.Users;
+using Core.Users.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Services.Progress;
 
 namespace RazorPagesApp.Pages.Administration;
 

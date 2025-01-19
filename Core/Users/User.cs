@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core.UserProgressFeatures;
+using System.ComponentModel.DataAnnotations;
 
-namespace Core.Models;
+namespace Core.Users;
 
 public class User
 {

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.Models;
+namespace Core.AdminAccess;
 
-public class Registration
+public class AdminRegistration
 {
     [Key]
     public Guid Id { get; set; }
@@ -11,7 +11,7 @@ public class Registration
 
     public override bool Equals(object? obj)
     {
-        if (obj is Registration r)
+        if (obj is AdminRegistration r)
             return r.Login == Login && r.Password == Password;
         return base.Equals(obj);
     }

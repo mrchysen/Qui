@@ -1,58 +1,28 @@
-﻿using Core.Models;
-using Core.Services.Authorization;
-using Core.Services.Questions;
+﻿using Core.AdminAccess;
+using Core.Questions;
+using Core.Questions.QuestionServices;
+using Core.Users;
+using Core.Users.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using RazorPagesApp.Services.Progress;
 
 namespace DAL;
 
-public class AppDbContext : DbContext, IQuestionRespository, IUserRepository, IAdminRegistration
+public class AppDbContext : DbContext, IUserRepository
 {
-    public AppDbContext(IConfiguration AdminData)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
-        //Database.EnsureDeleted();
-        // Database.EnsureCreated();
+        Database.EnsureCreated();
     }
 
-    public DbSet<Registration> Registrations { get; set; }
+    public DbSet<AdminRegistration> Registrations { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<User> Users { get; set; }
 
-    #region IQuestionsBD
-    public void AddQuestion(Question question)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        Questions.Add(question);
-
-        SaveChanges();
+        modelBuilder.Entity<AdminRegistration>().HasData(
+                new AdminRegistration { Id = Guid.NewGuid(), Login = "Admond", Password = "Price" });
     }
-
-    public void DeleteQuestion(Guid id)
-    {
-        var question = Questions.Find(id);
-
-        if (question == null)
-            return;
-
-        Questions.Remove(question);
-
-        SaveChanges();
-    }
-
-    public async void SaveQuestions(List<Question> questions)
-    {
-        Questions.ExecuteDelete();
-
-        await Questions.AddRangeAsync(questions);
-
-        await SaveChangesAsync();
-    }
-
-    public List<Question> GetQuestions()
-    {
-        return Questions.OrderBy(q => q.Order).ToList();
-    }
-    #endregion
 
     #region IUserCRUD
     public void SaveUser(User user)
@@ -100,14 +70,5 @@ public class AppDbContext : DbContext, IQuestionRespository, IUserRepository, IA
 
         SaveChanges();
     }
-    #endregion
-
-    #region IAdminRegistration
-
-    public bool IsAdmin(Registration registration)
-    {
-        return Registrations.ToList().Contains(registration);
-    }
-
     #endregion
 }

@@ -1,10 +1,10 @@
 ﻿using Core.Extensions;
-using Core.Models;
+using Core.Users;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 
-namespace RazorPagesApp.Services.Progress;
+namespace Core.Users.Services;
 
 /// <summary>
 /// Простой сервис для сохранения результатов в файлик
@@ -38,7 +38,7 @@ public class UserHandler : IUserRepository
             return new List<User>();
         }
 
-        string allJson = "[" + File.ReadAllText(FilePath).ReplaceFirst(",","") + "]";
+        string allJson = "[" + File.ReadAllText(FilePath).ReplaceFirst(",", "") + "]";
 
         var jsonOptions = new JsonSerializerOptions
         {
@@ -48,7 +48,7 @@ public class UserHandler : IUserRepository
 
         List<User> users = JsonSerializer.Deserialize<List<User>>(allJson, jsonOptions);
 
-        if(users == null)
+        if (users == null)
         {
             return new List<User>();
         }

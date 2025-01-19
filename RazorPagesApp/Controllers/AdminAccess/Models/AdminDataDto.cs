@@ -1,4 +1,4 @@
-﻿namespace RazorPagesApp.Controllers.Models;
+﻿namespace RazorPagesApp.Controllers.AdminAccess.Models;
 
 public class AdminDataDto
 {

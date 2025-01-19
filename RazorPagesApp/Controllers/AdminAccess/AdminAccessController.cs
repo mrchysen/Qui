@@ -1,32 +1,30 @@
-﻿using Core.Models;
-using Core.Services.Authorization;
-using DocumentFormat.OpenXml.EMMA;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using RazorPagesApp.Controllers.Models;
 using System.Security.Claims;
-using DAL;
+using Core.AdminAccess.Authorization;
+using Core.AdminAccess;
+using RazorPagesApp.Controllers.AdminAccess.Models;
 
-namespace RazorPagesApp.Controllers;
+namespace RazorPagesApp.Controllers.AdminAccess;
 
 [Route("admin")]
 public class AdminAccessController : Controller
 {
-    private readonly IAdminRegistration _adminRegistration;
+    private readonly IAdminRegistrationService _adminRegistrationService;
 
-    public AdminAccessController(AppDbContext AppDbContext)
+    public AdminAccessController(IAdminRegistrationService AdminRegistrationService)
     {
-        _adminRegistration = AppDbContext;
+        _adminRegistrationService = AdminRegistrationService;
     }
 
     [HttpGet("login")]
     public IActionResult GetLoginPage() => View("LoginPage", new AdminDataDto());
 
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterAdmin([FromForm]AdminDataDto adminDataDto)
+    public async Task<IActionResult> RegisterAdmin([FromForm] AdminDataDto adminDataDto)
     {
-        if (_adminRegistration.IsAdmin(new Registration()
+        if (await _adminRegistrationService.IsAdmin(new AdminRegistration()
         {
             Login = adminDataDto.Login,
             Password = adminDataDto.Password
@@ -43,7 +41,7 @@ public class AdminAccessController : Controller
                 principal,
                 new AuthenticationProperties { IsPersistent = false });
 
-            return Redirect("/Administration/Questions");
+            return RedirectToAction("GetList", "Questions");
         }
 
         return View("LoginPage", new AdminDataDto()

@@ -1,17 +1,23 @@
-using Core.Services.Authorization;
+using Core.AdminAccess.Authorization;
+using Core.Questions.QuestionServices;
 using DAL;
+using DAL.AdminAccessServices;
+using DAL.QuestionsServices;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie();
+    .AddCookie(op =>
+    {
+        op.LoginPath = "/";
+    });
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlite(builder.Configuration.GetConnectionString("quiapp")));
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IAdminRegistration>(x => x.GetService<AppDbContext>());
+builder.Services.AddScoped<IAdminRegistrationService, AdminRegistrationService>();
+builder.Services.AddScoped<IQuestionRespository, QuestionsRepository>();
 
 builder.Services.AddHttpContextAccessor();    // Enable use HttpContext in constructors
 builder.Services.AddDistributedMemoryCache(); // Add caching
@@ -20,7 +26,7 @@ builder.Services.AddRazorPages();             // Add razor pages in apllication
 
 var app = builder.Build();
 
-app.UseAuthentication();     // Обязательно перед UseAuthorization!
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseDeveloperExceptionPage();
 app.UseStaticFiles();

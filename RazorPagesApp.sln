@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPagesApp", "RazorPagesApp\RazorPagesApp.csproj", "{0496EAD8-84FD-4585-BD5F-7B2FA9629C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuiApp.WebMVC", "RazorPagesApp\QuiApp.WebMVC.csproj", "{0496EAD8-84FD-4585-BD5F-7B2FA9629C5C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{197F3CB1-6FEE-42F1-BF37-16AD28579F63}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{3C5E0F1D-1A31-40D5-873B-AFCEEF6E8549}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuiApp.Core", "Core\QuiApp.Core.csproj", "{3C5E0F1D-1A31-40D5-873B-AFCEEF6E8549}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{B9D379C4-B9CE-4CB1-AB52-9A51402153DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuiApp.Application", "Application\QuiApp.Application.csproj", "{B9D379C4-B9CE-4CB1-AB52-9A51402153DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{90260D98-4B87-4640-A43E-43D49C77B415}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuiApp.DAL", "DAL\QuiApp.DAL.csproj", "{90260D98-4B87-4640-A43E-43D49C77B415}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

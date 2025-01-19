@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.Models;
+namespace Core.Questions;
 
 public class Question
 {
-    [Key]
     public Guid Id { get; set; }
     public string Text { get; set; } = string.Empty;
     public List<string> Answers { get; set; } = new List<string>();

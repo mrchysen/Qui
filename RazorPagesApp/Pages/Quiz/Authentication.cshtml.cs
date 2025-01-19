@@ -1,4 +1,5 @@
-using Core.Models;
+using Core.UserProgressFeatures;
+using Core.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesApp.Extensions;

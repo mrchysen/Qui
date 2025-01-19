@@ -1,6 +1,4 @@
-﻿using Core.Models;
-using Core.Services.Questions;
-namespace RazorPagesApp.Services.Questions;
+﻿namespace Core.Questions.QuestionServices;
 public class QuestionService : IQuestionHandler
 {
     protected List<Question> Questions { get; set; } = new();
@@ -11,7 +9,7 @@ public class QuestionService : IQuestionHandler
 
     public QuestionService(IQuestionRespository bd)
     {
-        Questions = bd.GetQuestions();
+        Questions = new List<Question>();
         Bd = bd;
     }
 
@@ -28,7 +26,7 @@ public class QuestionService : IQuestionHandler
 
     public void CreateQuestion(Question question)
     {
-        if(Count == 0)
+        if (Count == 0)
             question.Order = Count + 1;
         else
             question.Order = Questions.Last().Order + 1;
