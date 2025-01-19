@@ -1,0 +1,34 @@
+﻿@using RazorPagesApp.Controllers.Models
+
+@model AdminDataDto
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Авторизация";
+    ViewData["css"] = "administration/admin_authorize.css";
+}
+
+<main class="main-container">
+    <div class="form-wrapper">
+        <form method="post" asp-action="RegisterAdmin" asp-controller="AdminAccess">
+            <div class="text-wrapper text-style">
+                Авторизация для администратора:
+            </div>
+            @if(Model.Warning is not null)
+            {
+                <div class="red warning-text-wrapper text-style">
+                    @Model.Warning
+                </div>
+            }
+            <div class="input-box">
+                <input class="text-input input-size text-style" type="text" asp-for="Login" required placeholder="Логин" />
+            </div>
+            <div class="input-box">
+                <input class="text-input input-size text-style" type="password" required asp-for="Password" placeholder="Пароль" />
+            </div>
+
+            <input class="button-input" type="submit" value="Принять" />
+        </form>
+    </div>
+</main>

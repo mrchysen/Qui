@@ -9,29 +9,10 @@ namespace DAL;
 
 public class AppDbContext : DbContext, IQuestionRespository, IUserRepository, IAdminRegistration
 {
-    private const string ConnectionString =
-        @"Data Source=ApplicationDB.db;";
-    private readonly List<Registration> stratRegistrations;
-
     public AppDbContext(IConfiguration AdminData)
     {
         //Database.EnsureDeleted();
-
-        stratRegistrations = AdminData.GetSection("AdminStartData").Get<List<Registration>>();
-
         // Database.EnsureCreated();
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.
-            UseSqlite(ConnectionString);
-    }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        foreach (var registration in stratRegistrations)
-            modelBuilder.Entity<Registration>().HasData(registration);
     }
 
     public DbSet<Registration> Registrations { get; set; }
