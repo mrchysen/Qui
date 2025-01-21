@@ -1,19 +1,20 @@
-﻿@page
+﻿@using QuiApp.WebMVC.Controllers.Quiz.Models
 
-@model RazorPagesApp.Pages.Quiz.ResultModel
+@model ResultDto
 
 @{
     ViewData["css"] = "quiz/result.css";
     ViewData["Title"] = "Результаты";
+    Layout = "../Shared/_MainLayout.cshtml";
 }
 
 <main>
     <section class="info-section">
-        <div class="text-style">Спасибо за прохождение тестирования. Правильных ответов: @Model.RightAnswers</div>
+        <div class="text-style">Спасибо за прохождение тестирования. Правильных ответов: @Model.Progress.RightAnswers</div>
         <div class="text-style">Вы нам очень помогли!</div>
     </section>
-    
-    <hr class="line"/>
+
+    <hr class="line" />
     <div class="table-wrapper">
         <table>
             <tr>
@@ -26,18 +27,17 @@
             {
                 <tr>
                     <td class="text-centre text-style">@(i + 1)</td>
-                    <td class="text-style">@Model.Questions[i]!.Text</td>
+                    <td class="text-style">@Model.Questions[i].Text</td>
                     <td class="text-style">@Model.Progress.Answers[i]</td>
-                    <td class="text-style">@(Model.Questions[i]!.IsAnswer(Model.Progress.Answers[i]) ? "Правильно" : "Неправильно")</td>
+                    <td class="text-style">@(Model.Questions[i].IsAnswer(Model.Progress.Answers[i]) ? "Правильно" : "Неправильно")</td>
                 </tr>
             }
         </table>
     </div>
 
-    
+
 
     <hr class="line" />
 
-    <a class="button text-style" href="/Quiz/Authentication">Пройти заново</a>
-
+    <a class="button text-style" href="@Url.Action("LoginPage", "Users")">Пройти заново</a>
 </main>

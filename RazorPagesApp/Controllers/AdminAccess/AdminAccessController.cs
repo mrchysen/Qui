@@ -19,7 +19,7 @@ public class AdminAccessController : Controller
     }
 
     [HttpGet("login")]
-    public IActionResult GetLoginPage() => View("LoginPage", new AdminDataDto());
+    public IActionResult LoginPage() => View("LoginPage", new AdminDataDto());
 
     [HttpPost("register")]
     public async Task<IActionResult> RegisterAdmin([FromForm] AdminDataDto adminDataDto)
@@ -49,7 +49,4 @@ public class AdminAccessController : Controller
             Warning = "Неверный пароль или логин"
         });
     }
-
-    [HttpGet("me")]
-    public string GetMe() => HttpContext.User.IsInRole("Admin").ToString();
 }

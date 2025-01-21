@@ -16,7 +16,7 @@ public class UserResultsModel : PageModel
     public UserResultsModel(IUserRepository users, IQuestionHandler questions) 
     {
         UserHandler = users;
-        Users = UserHandler.GetUsers();
+        Users = null;
         Users.Sort((u1, u2) => - u1.GetStartTime().CompareTo(u2.GetStartTime()));
     }
 
@@ -43,7 +43,7 @@ public class UserResultsModel : PageModel
 
         string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.xlsx");
         
-        excelGen.CreateExcelFile(UserHandler.GetUsers() , path);
+        excelGen.CreateExcelFile(null , path);
         Console.WriteLine("װאיכ סמחהאם");
         //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.xlsx")
 

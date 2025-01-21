@@ -3,7 +3,6 @@ using Core.Questions.QuestionServices;
 using Core.UserProgressFeatures;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Extensions;
 
 namespace RazorPagesApp.Pages.Quiz;
 
@@ -15,21 +14,14 @@ public class QuestionModel : PageModel
     public QuestionModel(IQuestionHandler questions, IHttpContextAccessor accessor)
     {
         Questions = questions;
-        Progress = accessor.HttpContext.Session.Get<UserProgress>("progress");
 
-        Question = Progress.CurrentQuestion < Questions.Count ? Questions[Progress.CurrentQuestion] : new();
     }
 
     public IActionResult OnPost()
     { 
         ProgressHandling(HttpContext.Request.Form);
 
-        Question = Progress.CurrentQuestion < Questions.Count ? Questions[Progress.CurrentQuestion] : new();
 
-        if (IsEndOfTesting())
-        {
-            return Redirect("/Quiz/Result");
-        }
 
         return Page();
     }
@@ -39,14 +31,11 @@ public class QuestionModel : PageModel
         DateTime startDate = ParseDate(form["starttime"]);
         DateTime endDate = ParseDate(form["endtime"]);
 
-        Progress.CurrentQuestion++;
         Progress.Answers.Add(form["answer"]);
-        Progress.IsRightAnswerList.Add(Questions[Progress.CurrentQuestion - 1].IsAnswer(form["answer"]));
+        Progress.RightAnswerList.Add(Questions[- 1].IsAnswer(form["answer"]));
         Progress.WasSearched.Add(form["wassearched"] == "1");
         Progress.AnswerStartDateTime.Add(startDate);
         Progress.AnswerEndDateTime.Add(endDate);
-
-        HttpContext.Session.Set("progress", Progress);
     }
     /// <summary>
     /// format "YYYY-MM-DD hh:mm:ss,fff"
@@ -74,16 +63,8 @@ public class QuestionModel : PageModel
 
     public IActionResult OnGet()
     {
-        if (IsEndOfTesting())
-        {
-            return Redirect("/Quiz/Result");
-        }
+        
 
         return Page();
-    }
-
-    protected bool IsEndOfTesting()
-    {
-        return Progress.CurrentQuestion >= Questions.Count;
     }
 }

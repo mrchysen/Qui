@@ -1,10 +1,12 @@
 using Core.AdminAccess.Authorization;
 using Core.Questions.QuestionServices;
+using Core.Users.Services;
 using DAL;
 using DAL.AdminAccessServices;
 using DAL.QuestionsServices;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using QuiApp.DAL.UserProgressServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,25 +20,24 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("quiapp")));
 builder.Services.AddScoped<IAdminRegistrationService, AdminRegistrationService>();
 builder.Services.AddScoped<IQuestionRespository, QuestionsRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddHttpContextAccessor();    // Enable use HttpContext in constructors
-builder.Services.AddDistributedMemoryCache(); // Add caching
-builder.Services.AddSession();                // Add sessions
-builder.Services.AddRazorPages();             // Add razor pages in apllication
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddServerSideBlazor();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseDeveloperExceptionPage();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
-app.UseSession();    // Use sessia
-app.MapRazorPages(); // Routing for razor pages
 app.MapControllers();
-
-// Custom Middelwares \\
-//app.UseMiddleware<AuntificationMiddelware>();
-//app.UseMiddleware<AdministrationControlMiddelware>();
+app.MapBlazorHub();
 
 app.Run();

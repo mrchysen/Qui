@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Core.Questions;
+﻿namespace Core.Questions;
 
 public class Question
 {

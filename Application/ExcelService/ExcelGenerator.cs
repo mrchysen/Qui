@@ -69,7 +69,7 @@ public class ExcelGenerator : IExcelService
             AddCellValue(sheet, i + 3, 6 + j * 5, user.Progress.Answers[j]); // ответ
             AddCellValue(sheet, i + 3, 6 + j * 5 + 1, user.Progress.AnswerStartDateTime[j].ToLongTimeString() + $" {user.Progress.AnswerStartDateTime[j].Millisecond}"); // время начала
             AddCellValue(sheet, i + 3, 6 + j * 5 + 2, user.Progress.AnswerEndDateTime[j].ToLongTimeString() + $" {user.Progress.AnswerStartDateTime[j].Millisecond}");   // время нажатия на кнопку далее
-            AddCellValue(sheet, i + 3, 6 + j * 5 + 3, (user.Progress.IsRightAnswerList[j] ? 1 : 0).ToString()); // правильность ответа
+            AddCellValue(sheet, i + 3, 6 + j * 5 + 3, (user.Progress.RightAnswerList[j] ? 1 : 0).ToString()); // правильность ответа
             AddCellValue(sheet, i + 3, 6 + j * 5 + 4, (user.Progress.WasSearched[j] ? 1 : 0).ToString()); // искал ли в инете
         }
 
@@ -88,7 +88,7 @@ public class ExcelGenerator : IExcelService
     protected bool IndexCondition(int index, User User)
     {
         return index < User.Progress.Answers.Count &&
-            index < User.Progress.IsRightAnswerList.Count &&
+            index < User.Progress.RightAnswerList.Count &&
             index < User.Progress.AnswerEndDateTime.Count &&
             index < User.Progress.AnswerStartDateTime.Count &&
             index < User.Progress.WasSearched.Count;

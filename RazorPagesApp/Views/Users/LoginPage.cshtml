@@ -1,0 +1,61 @@
+﻿@using QuiApp.WebMVC.Controllers.Users.Models
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model UserDto;
+
+@{
+    ViewData["Title"] = "Регистрация";
+    ViewData["css"] = "quiz/authentication.css";
+    Layout = "../Shared/_MainLayout.cshtml";
+}
+
+<main class="main-container">
+    <div class="info-wrapper">
+        <div class="info-inside text-style">
+            <i class='bx bx-info-circle'></i>
+            Для участия в тестирование оставьте о себе данные
+        </div>
+    </div>
+
+    <div class="form-wrapper">
+        <p class="form-container__info text-style bold-text">
+            О Вас
+        </p>
+        <form method="post" asp-action="RegisterUser" asp-controller="Users">
+            <div class="input-box text-style">
+                <label>
+                    Фамилия
+                </label>
+                <input class="text-input" type="text" required asp-for="Sername" />
+            </div>
+            <div class="input-box text-style">
+                <label>
+                    Имя
+                </label>
+                <input class="text-input" type="text" required asp-for="Name" />
+            </div>
+            <div class="input-box text-style">
+                <label>
+                    Отчество
+                </label>
+                <input class="text-input" type="text" asp-for="FatherName" placeholder="необязательно" />
+            </div>
+            <div class="input-box text-style">
+                <label>
+                    Возраст
+                </label>
+                <input class="text-input" type="number" required value="18" asp-for="Age" />
+            </div>
+            <div class="radio-box text-style">
+                <input class="radio-button-input" asp-for="Sex" id="male" type="radio" name="Sex" checked value="0" />
+                <label class="radio-button-label" for="male">Мужчина</label>
+                <input class="radio-button-input" asp-for="Sex" id="female" type="radio" name="Sex" value="1" />
+                <label class="radio-button-label" for="female">Женщина</label>
+            </div>
+            <div class="button-wrapper">
+                <input class="submit-input" type="submit" value="Отправить" />
+            </div>
+        </form>
+    </div>
+</main>

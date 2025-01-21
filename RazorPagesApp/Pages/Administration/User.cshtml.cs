@@ -15,7 +15,7 @@ public class UserModel : PageModel
     }
     public IActionResult OnGet(Guid id)
     {
-        User = UserHandler.GetUser(id);
+        User = null;
 
         return Page();
     }
@@ -23,7 +23,7 @@ public class UserModel : PageModel
     public bool IndexCondition(int index)
     {
         return index < User.Progress.Answers.Count &&
-            index < User.Progress.IsRightAnswerList.Count &&
+            index < User.Progress.RightAnswerList.Count &&
             index < User.Progress.AnswerEndDateTime.Count &&
             index < User.Progress.AnswerStartDateTime.Count &&
             index < User.Progress.WasSearched.Count;

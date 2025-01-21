@@ -1,0 +1,14 @@
+﻿@using QuiApp.WebMVC.Controllers.Quizes.Models
+@model InfoData
+
+@{
+    Layout = "../Shared/_MainLayout.cshtml";
+}
+
+<p>О тесте:</p>
+<p>@Model.InfoMessage</p>
+
+<p>Инструкция:</p>
+<p>@Model.InstructionMessage</p>
+
+<a href="@Url.Action("QuizView", "Quiz")">Начать тестирование</a>

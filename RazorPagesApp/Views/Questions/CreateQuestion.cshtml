@@ -6,10 +6,11 @@
 @{
     ViewData["Title"] = "Создание вопроса";
     ViewData["css"] = "administration/question.css";
+    Layout = "../Shared/_MainLayout.cshtml";
 }
 
 <main>
-    <a class="button1 text-style" href="@Url.Action("List", "Questions")"><i class='bx bx-chevron-left'></i>Отмена</a>
+    <a class="button1 text-style" href="@Url.Action("GetList", "Questions")"><i class='bx bx-chevron-left'></i>Отмена</a>
 
     <div class="info-wraper text-style">
         <i class='bx bx-info-circle'></i>

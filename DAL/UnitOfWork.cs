@@ -13,8 +13,6 @@ public class UnitOfWork
 {
     private readonly AppDbContext _context;
 
-    public IUserRepository UserRepository => _context;
-
     public UnitOfWork(AppDbContext context)
     {
         _context = context;

@@ -4,7 +4,6 @@ using Core.Users;
 using Core.Users.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Extensions;
 
 namespace RazorPagesApp.Pages.Quiz;
 
@@ -22,13 +21,9 @@ public class ResultModel : PageModel
     {
         var httpContext = accessor.HttpContext;
 
-        User = httpContext.Session.Get<User>("user");
-        Progress = httpContext.Session.Get<UserProgress>("progress");
         Questions = questions;
 
         Saver = saver;
-
-        RightAnswers = Progress.CountRightAnswers(Questions);
     }
 
     public IActionResult OnGet()
@@ -42,9 +37,6 @@ public class ResultModel : PageModel
     {
         User.Progress = Progress;
         User.Progress.Id = Guid.NewGuid();
-        User.Progress.CountRightAnswers(Questions);
-
-        Saver.SaveUser(User);
 
         if (HttpContext.Session.GetString("authentication") != "admin")
         {

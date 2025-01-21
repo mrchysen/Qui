@@ -1,0 +1,111 @@
+﻿@using Core.UserProgressFeatures
+@using Core.Users
+@using Core.Users.Services
+@using Microsoft.AspNetCore.Components.Web
+@using Core.Questions
+@using System.Security.Claims
+
+@inject NavigationManager NavigationManager
+@inject IUserRepository UserRepository
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+@if (Questions.Count != 0)
+{
+    <div class="info-wrapper text-style">
+        <div class="question-wrapper ">
+            Вопрос @(CurrentQuestionIndex + 1):
+
+            @Questions[CurrentQuestionIndex].Text
+        </div>
+        <div id="time-panel" class="time-panel">
+            <i class='bx bx-timer size-time-icon'></i>&nbsp<span id="time"></span>
+        </div>
+    </div>
+
+    <div>
+        <textarea id="answerinput" class="text-style" @bind="Answer" required name="Answer" cols="50" rows="3" placeholder="Ответ"></textarea>
+
+        <input hidden name="WasSearched" value="0" />
+        <input hidden name="StartTime" value="0" />
+        <input hidden name="EndTime" value="0" />
+        <input id="time-to-answer-input" hidden name="TimeToAnswer" value="40" />
+        <input id="timeout-to-answer-input" hidden name="TimeOutToAnswer" value="20" />
+
+        <div class="button-wrapper">
+            <div class="button-box">
+                <button class="button left-button-radius text-style" @onclick="Next">Далее</button>
+            </div>
+            <div class="button-box">
+                <button class="button right-button-radius text-style" type="button" id="SearchButton"><i class='bx bx-search'></i>Поиск в интернет</button>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>Странно. Но вопросов к Вам нет</p>
+    <a href="">Уйти отсюда</a>
+}
+
+@code {
+    [Parameter]
+    public List<Question> Questions { get; set; } = null!;
+
+    private int CurrentQuestionIndex { get; set; }
+
+    private List<string> Answers { get; set; } = new();
+
+    private string Answer { get; set; } = string.Empty;
+
+    private async Task Next()
+    {
+        Answers.Add(Answer);
+
+        if (Questions.Count == CurrentQuestionIndex + 1)
+        {
+            var id = await SaveResuts();
+
+            NavigationManager.NavigateTo($"/quiz/result?id={id.ToString()}", true);
+
+            return;
+        }
+
+        CurrentQuestionIndex++;
+
+        Answer = "";
+    }
+
+    private async Task<Guid> SaveResuts()
+    {
+        var currentUser = HttpContextAccessor.HttpContext!.User;
+
+        var userProgress = new UserProgress()
+        {
+            Id = Guid.NewGuid(),
+            WasSearched = Enumerable.Repeat(false, Questions.Count).ToList(),
+            Answers = Answers.Select(el => el.Trim()).ToList(),
+            AnswerStartDateTime = Enumerable.Repeat(DateTime.Now, Questions.Count).ToList(),
+            AnswerEndDateTime = Enumerable.Repeat(DateTime.Now, Questions.Count).ToList(), 
+        };
+
+        userProgress.CountRightAnswers(Questions);
+
+        var userId = Guid.NewGuid();
+
+        var user = new User()
+        {
+            Id = userId,
+            Age = int.Parse(currentUser.FindFirst(ClaimTypes.DateOfBirth)?.Value ?? "0"),
+            Name = currentUser.FindFirst(ClaimTypes.GivenName)?.Value ?? "null",
+            Sername = currentUser.FindFirst(ClaimTypes.Surname)?.Value ?? "null",
+            FatherName = currentUser.FindFirst(ClaimTypes.Surname)?.Value ?? "null",
+            Sex = (Sex)Enum.Parse(typeof(Sex), currentUser.FindFirst(ClaimTypes.Gender)?.Value ?? "Man"),
+            Progress = userProgress
+        };
+
+        await UserRepository.AddUser(user);
+
+        return userId;
+    }
+}

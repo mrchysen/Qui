@@ -1,8 +1,6 @@
-using Core.UserProgressFeatures;
 using Core.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Extensions;
 
 namespace RazorPagesApp.Pages.Quiz;
 
@@ -38,9 +36,6 @@ public class AuthenticationModel : PageModel
 
         if (User.FatherName == null)
             User.FatherName = "-";
-
-        Session.Set("user", User);
-        Session.Set("progress", new UserProgress());
 
         // Redirect
         HttpContext.Response.Redirect("/Quiz/Instructions");

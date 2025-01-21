@@ -1,0 +1,12 @@
+﻿@using QuiApp.WebMVC.Components
+@using QuiApp.WebMVC.Controllers.Quizes.Models
+
+@model QuizData
+
+@{
+    ViewData["css"] = "quiz/question.css";
+    ViewData["Title"] = "Тест";
+    Layout = "../Shared/_MainLayout.cshtml";
+}
+
+@(await Html.RenderComponentAsync<Quiz>(RenderMode.ServerPrerendered, new { Questions = Model.Questions}))

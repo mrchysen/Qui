@@ -50,7 +50,9 @@ public class QuestionsController : Controller
             return RedirectToAction("GetList");
 
         question.Text = questionDto.Text;
-        question.Answers = questionDto.Answers.Split("\r\n").ToList();
+        question.Answers = questionDto.Answers.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
+            .Select(x => x.Trim())
+            .ToList();
 
         _questionRespository.Update(question);
 
@@ -67,7 +69,10 @@ public class QuestionsController : Controller
         { 
             Id = Guid.NewGuid(),
             Text = questionDto.Text,
-            Answers = questionDto.Answers.Split("\r\n").ToList()
+            Answers = questionDto.Answers
+            .Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
+            .Select(x => x.Trim())
+            .ToList()
         });
 
         return RedirectToAction("GetList");

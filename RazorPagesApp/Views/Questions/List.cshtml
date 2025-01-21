@@ -6,6 +6,7 @@
 @{
     ViewData["Title"] = "Панель администратора";
     ViewData["css"] = "administration/questions.css";
+    Layout = "../Shared/_MainLayout.cshtml";
 }
 
 <main class="main-container">
@@ -16,82 +17,89 @@
         <a href="/Administration/Questions?handler=Clear" class="text-style button">Удалить все вопросы</a>
     </div>
     <p class="text-style def-margin">Количество вопросов - @Model.Questions.Count</p>
-    <div>
-        <table>
-            <tr>
-                <td class="text-style head">
-                    Номер
-                </td>
-                <td class="text-style head">
-                    Вопрос
-                </td>
-                <td class="text-style head">
-                    Ответы
-                </td>
-                <td class="text-style head">
-                </td>
-                <td class="text-style head">
-                </td>
-                <td class="text-style head">
-                </td>
-            </tr>
-            @for (int i = 0; i < Model.Questions.Count; i++)
-            {
+    
+    @if(Model.Questions.Count == 0)
+    {
+        <p>Нет вопрсов</p>
+    }
+    else
+    {
+        <div>
+            <table>
                 <tr>
-                    <td class="text-style">
-                        @(i + 1))
+                    <td class="text-style head">
+                        Номер
                     </td>
-                    <td class="text-style">
-                        @Model.Questions[i].Text
+                    <td class="text-style head">
+                        Вопрос
                     </td>
-                    <td class="text-style">
-                        @{
-                            if (Model.Questions[i].Answers.Count > 0)
-                            {
-                                <text>@Model.Questions[i].Answers[0].ToString()</text>
-                            }
-                        }
+                    <td class="text-style head">
+                        Ответы
                     </td>
-                    <td class="text-centre">
-                        <a href="@Url.Action("ChangeView", "Questions", new { Id = Model.Questions[i].Id })" class="text-style link-style">Редактировать</a>
+                    <td class="text-style head">
                     </td>
-                    <td class="text-centre">
-                        <a href="@Url.Action("Delete", "Questions", new { Id = Model.Questions[i].Id })" class="text-style link-style">Удалить</a>
+                    <td class="text-style head">
                     </td>
-                    <td>
-                        @if (i != 0)
-                        {
-                            <a href="/Administration/Questions?handler=Up&id=@Model.Questions[i].Id">
-                                <img src="~/img/up-arrow.svg" width="20" height="20" alt="Вверх" />
-                            </a>
-                        }
-                        <br />
-                        @if (i + 1 != Model.Questions.Count)
-                        {
-                            <a href="/Administration/Questions?handler=Down&id=@Model.Questions[i].Id">
-                                <img src="~/img/down-arrow.svg" width="20" height="20" alt="Вниз" />
-                            </a>
-                        }
+                    <td class="text-style head">
                     </td>
                 </tr>
-                @for (int j = 1; j < Model.Questions[i].Answers.Count; j++)
+                @for (int i = 0; i < Model.Questions.Count; i++)
                 {
                     <tr>
-                        <td>
-                        </td>
-                        <td>
+                        <td class="text-style">
+                            @(i + 1))
                         </td>
                         <td class="text-style">
-                            @Model.Questions[i].Answers[j].ToString()
+                            @Model.Questions[i].Text
+                        </td>
+                        <td class="text-style">
+                            @{
+                                if (Model.Questions[i].Answers.Count > 0)
+                                {
+                                    <text>@Model.Questions[i].Answers[0].ToString()</text>
+                                }
+                            }
+                        </td>
+                        <td class="text-centre">
+                            <a href="@Url.Action("ChangeView", "Questions", new { Id = Model.Questions[i].Id })" class="text-style link-style">Редактировать</a>
+                        </td>
+                        <td class="text-centre">
+                            <a href="@Url.Action("Delete", "Questions", new { Id = Model.Questions[i].Id })" class="text-style link-style">Удалить</a>
                         </td>
                         <td>
-                        </td>
-                        <td>
+                            @if (i != 0)
+                            {
+                                <a href="/Administration/Questions?handler=Up&id=@Model.Questions[i].Id">
+                                    <img src="~/img/up-arrow.svg" width="20" height="20" alt="Вверх" />
+                                </a>
+                            }
+                            <br />
+                            @if (i + 1 != Model.Questions.Count)
+                            {
+                                <a href="/Administration/Questions?handler=Down&id=@Model.Questions[i].Id">
+                                    <img src="~/img/down-arrow.svg" width="20" height="20" alt="Вниз" />
+                                </a>
+                            }
                         </td>
                     </tr>
+                    @for (int j = 1; j < Model.Questions[i].Answers.Count; j++)
+                    {
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td class="text-style">
+                                @Model.Questions[i].Answers[j].ToString()
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    }
                 }
-            }
-        </table>
-
-    </div>
+            </table>
+        </div>
+    }
 </main>
