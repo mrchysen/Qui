@@ -7,6 +7,7 @@ using DAL.QuestionsServices;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using QuiApp.DAL.UserProgressServices;
+using QuiApp.WebMVC.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +23,8 @@ builder.Services.AddScoped<IAdminRegistrationService, AdminRegistrationService>(
 builder.Services.AddScoped<IQuestionRespository, QuestionsRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddHttpContextAccessor();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

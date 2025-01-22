@@ -4,11 +4,11 @@
 @using Microsoft.AspNetCore.Components.Web
 @using Core.Questions
 @using System.Security.Claims
+@using System.Timers
 
 @inject NavigationManager NavigationManager
 @inject IUserRepository UserRepository
 @inject IHttpContextAccessor HttpContextAccessor
-
 
 @if (Questions.Count != 0)
 {
@@ -19,7 +19,7 @@
             @Questions[CurrentQuestionIndex].Text
         </div>
         <div id="time-panel" class="time-panel">
-            <i class='bx bx-timer size-time-icon'></i>&nbsp<span id="time"></span>
+            <i class='bx bx-timer size-time-icon'></i>&nbsp<span id="time">@TimeLeft</span>
         </div>
     </div>
 
@@ -58,12 +58,45 @@ else
 
     private string Answer { get; set; } = string.Empty;
 
+    private Timer _timer;
+    private int TimeLeft = 5;
+
+    protected override void OnInitialized()
+    {
+        _timer = new Timer(1000);
+        _timer.Elapsed += ChangeTime;
+        _timer.Start();
+    }
+
+    private void StartTimer()
+    {
+        TimeLeft = 5;
+        _timer.Start();
+    }
+
+    private async void ChangeTime(object sender, ElapsedEventArgs e)
+    {
+        TimeLeft--;
+
+        if(TimeLeft == 0)
+        {
+            _timer.Stop();
+            await Next();
+            StartTimer();
+        }
+
+        await InvokeAsync(() => StateHasChanged());
+    }
+
     private async Task Next()
     {
         Answers.Add(Answer);
 
+        StartTimer();
+
         if (Questions.Count == CurrentQuestionIndex + 1)
         {
+            _timer.Stop();
             var id = await SaveResuts();
 
             NavigationManager.NavigateTo($"/quiz/result?id={id.ToString()}", true);
