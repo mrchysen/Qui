@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/RazorPagesApp/ApplicationDB.db
+/RazorPagesApp/ApplicationDB.db-shm
+/RazorPagesApp/ApplicationDB.db-wal

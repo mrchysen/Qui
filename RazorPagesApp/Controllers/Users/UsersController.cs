@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuiApp.WebMVC.Controllers.Users.Models;
 using System.Security.Claims;
@@ -49,5 +50,17 @@ public class UsersController : Controller
 
         Response.Cookies.Delete(ReturnUrlKey);
         return Redirect(returnUrl ?? "/quiz/info");
+    }
+
+    [Authorize(Roles = "Admin")]
+    public IActionResult UserList()
+    {
+
+
+
+        return View("UserList", new UserListDto()
+        {
+
+        });
     }
 }
