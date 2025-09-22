@@ -5,10 +5,21 @@
     Layout = "../Shared/_MainLayout.cshtml";
 }
 
-<p>О тесте:</p>
-<p>@Model.InfoMessage</p>
+<div class="card m-2">
+    <div class="card-header">
+        О тесте:
+    </div>
+    <div class="card-body">
+        <p class="card-text">@Model.InfoMessage</p>
+    </div>
+</div>
 
-<p>Инструкция:</p>
-<p>@Model.InstructionMessage</p>
-
-<a href="@Url.Action("QuizView", "Quiz")">Начать тестирование</a>
+<div class="card m-2">
+    <div class="card-header">
+        Инструкция:
+    </div>
+    <div class="card-body">
+        <p class="card-text">@Model.InstructionMessage</p>
+        <a href="@Url.Action("QuizView", "Quiz")" class="btn btn-primary">Начать тестирование</a>
+    </div>
+</div>

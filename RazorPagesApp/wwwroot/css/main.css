@@ -14,10 +14,7 @@
 }
 
 body, html {
-    background-color: #DCD0D0;
-}
-body {
-    height : 100%;
+    height: 100vh;
 }
 
 .header-block {

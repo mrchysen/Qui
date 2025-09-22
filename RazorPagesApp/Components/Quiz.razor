@@ -24,7 +24,15 @@
     </div>
 
     <div>
-        <textarea id="answerinput" class="text-style" @bind="Answer" required name="Answer" cols="50" rows="3" placeholder="Ответ"></textarea>
+        <textarea 
+            id="answerinput"
+            class="text-style" 
+            @bind="Answer" 
+            name="Answer" 
+            cols="50" 
+            rows="3" 
+            placeholder="Ответ"
+            required />
 
         <input hidden name="WasSearched" value="0" />
         <input hidden name="StartTime" value="0" />
@@ -34,10 +42,21 @@
 
         <div class="button-wrapper">
             <div class="button-box">
-                <button class="button left-button-radius text-style" @onclick="Next">Далее</button>
+                <button 
+                    class="button left-button-radius text-style" 
+                    @onclick="OnNextButtonClicked">
+                    Далее
+                </button>
             </div>
             <div class="button-box">
-                <button class="button right-button-radius text-style" type="button" id="SearchButton"><i class='bx bx-search'></i>Поиск в интернет</button>
+                <button 
+                    class="button right-button-radius text-style" 
+                    type="button"
+                    @onclick="OnSearchButtonClicked"
+                    id="SearchButton">
+                    <i class='bx bx-search' />
+                    Поиск в интернет
+                </button>
             </div>
         </div>
     </div>
@@ -55,49 +74,71 @@ else
     private int CurrentQuestionIndex { get; set; }
 
     private List<string> Answers { get; set; } = new();
+    private List<bool> SearchStatuses { get; set; } = new();
 
     private string Answer { get; set; } = string.Empty;
+    private bool WasSearch { get; set; } = false;
+    private DateTime StartTime { get; set; }
+    private DateTime EndTime { get; set; }
 
-    private Timer _timer;
+    private Timer _timer = null!;
     private int TimeLeft = 5;
+    private bool quizStopped = false;
 
     protected override void OnInitialized()
     {
         _timer = new Timer(1000);
         _timer.Elapsed += ChangeTime;
         _timer.Start();
+
+        StartTime = DateTime.Now;
     }
 
-    private void StartTimer()
+    private void ResetAndStartTimer()
     {
-        TimeLeft = 5;
-        _timer.Start();
-    }
-
-    private async void ChangeTime(object sender, ElapsedEventArgs e)
-    {
-        TimeLeft--;
-
-        if(TimeLeft == 0)
+        if (!quizStopped)
         {
-            _timer.Stop();
-            await Next();
-            StartTimer();
+            TimeLeft = 5;
+            _timer.Start();
         }
-
-        await InvokeAsync(() => StateHasChanged());
     }
 
-    private async Task Next()
+    private async void ChangeTime(object? sender, ElapsedEventArgs e)
+    {
+        if (!quizStopped)
+        {
+            TimeLeft--;
+
+            if (TimeLeft == 0)
+            {
+                _timer.Stop();
+                await OnNextButtonClicked();
+                ResetAndStartTimer();
+            }
+
+            await InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    private void OnSearchButtonClicked()
+    {
+        SearchStatuses.Add(true);
+    }
+
+    private async Task OnNextButtonClicked()
     {
         Answers.Add(Answer);
 
-        StartTimer();
+        ResetAndStartTimer();
 
-        if (Questions.Count == CurrentQuestionIndex + 1)
+        if (IsLastQuestion)
         {
             _timer.Stop();
+            quizStopped = true;
             var id = await SaveResuts();
+
+            if (id == Guid.Empty)
+                return;
 
             NavigationManager.NavigateTo($"/quiz/result?id={id.ToString()}", true);
 
@@ -109,8 +150,15 @@ else
         Answer = "";
     }
 
+    private bool IsLastQuestion => Questions.Count == CurrentQuestionIndex + 1;
+
     private async Task<Guid> SaveResuts()
     {
+        if (HttpContextAccessor.HttpContext is null)
+        {
+            return Guid.Empty;
+        }
+
         var currentUser = HttpContextAccessor.HttpContext!.User;
 
         var userProgress = new UserProgress()

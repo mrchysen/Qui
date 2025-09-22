@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Core.Users.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,14 @@ namespace QuiApp.WebMVC.Controllers.Users;
 [Route("")]
 public class UsersController : Controller
 {
+    private IUserRepository _userRepository;
+    
     private const string ReturnUrlKey = "ReturnUrl";
+
+    public UsersController(IUserRepository userRepository)
+    {
+        _userRepository = userRepository;
+    }
 
     [HttpGet("")]
     public IActionResult LoginPage([FromQuery] string? returnUrl)
@@ -22,7 +30,7 @@ public class UsersController : Controller
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterUser([FromForm] UserDto userDto)
+    public async Task<IActionResult> RegisterUser([FromForm] UserLoginDto userDto)
     {
         var returnUrl = Request.Cookies[ReturnUrlKey];
 
@@ -53,14 +61,47 @@ public class UsersController : Controller
     }
 
     [Authorize(Roles = "Admin")]
-    public IActionResult UserList()
+    [HttpGet("users/list")]
+    public async Task<IActionResult> UserList()
     {
-
-
+        var users = await _userRepository.GetUsers();
 
         return View("UserList", new UserListDto()
         {
+            Users = users
+        });
+    }
 
+    [Authorize(Roles = "Admin")]
+    [HttpGet("users/delete")]
+    public async Task<IActionResult> DeleteUser([FromQuery] Guid id)
+    {
+        await _userRepository.DeleteUser(id);
+
+        return RedirectToAction("UserList", "Users");
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("users/delete-all")]
+    public async Task<IActionResult> DeleteAllUsers([FromQuery] Guid id)
+    {
+        await _userRepository.DeleteAllUser();
+
+        return RedirectToAction("UserList", "Users");
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("users")]
+    public async Task<IActionResult> UserList([FromQuery] Guid id)
+    {
+        var user = await _userRepository.GetUser(id);
+
+        if(user == null) 
+            return RedirectToAction("UserList", "Users");
+
+        return View("User", new UserDto()
+        {
+            User = user
         });
     }
 }

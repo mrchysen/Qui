@@ -1,0 +1,56 @@
+# Общие системные файлы
+.DS_Store
+Thumbs.db
+
+# Файлы IDE
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.iml
+
+# Папки сборки .NET
+**/bin/
+**/obj/
+**/publish/
+
+# Файлы проектов (копируем только .csproj явно в Dockerfile)
+!**/*.csproj
+
+# Файлы конфигурации NuGet
+.nuget/
+NuGet.exe
+nuget.config
+*.nuget.props
+*.nuget.targets
+
+# Файлы пакетов
+**/packages/
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.temp
+
+# Резервные копии
+*.bak
+*.backup
+
+# Файлы параметров пользователя
+*.userprefs
+
+# Файлы тестов
+**/TestResults/
+
+# Файлы покрытия кода
+*.coverage
+*.coveragexml
+
+# Файлы Docker (чтобы не копировать сам себя)
+Dockerfile*
+.dockerignore
+
+# Файлы миграций (если не нужны в контейнере)
+**/Migrations/*.Designer.cs
+**/Migrations/*.sql

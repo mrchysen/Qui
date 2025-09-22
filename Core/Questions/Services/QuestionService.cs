@@ -55,6 +55,6 @@ public class QuestionService : IQuestionHandler
 
     protected void Save()
     {
-        Bd.SaveQuestions(Questions);
+        Bd.AddQuestions(Questions);
     }
 }

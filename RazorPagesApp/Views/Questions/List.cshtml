@@ -6,15 +6,13 @@
 @{
     ViewData["Title"] = "Панель администратора";
     ViewData["css"] = "administration/questions.css";
-    Layout = "../Shared/_MainLayout.cshtml";
+    Layout = "../Shared/_AdminLayout.cshtml";
 }
 
 <main class="main-container">
     <div class="container">
         <a href="@Url.Action("CreateView", "Questions")" class="text-style button">Добавить вопрос</a>
-        <a href="/Administration/UserResults" class="text-style button">Посмотреть результаты</a>
-        <a href="/Administration/UserResults?handler=ExcelFile" class="text-style button">Скачать результаты</a>
-        <a href="/Administration/Questions?handler=Clear" class="text-style button">Удалить все вопросы</a>
+        <a href="@Url.Action("DeleteAll", "Questions")" class="text-style button">Удалить все вопросы</a>
     </div>
     <p class="text-style def-margin">Количество вопросов - @Model.Questions.Count</p>
     

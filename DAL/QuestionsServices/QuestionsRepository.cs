@@ -33,7 +33,7 @@ public class QuestionsRepository : IQuestionRespository
         _appDbContext.SaveChanges();
     }
 
-    public async void SaveQuestions(List<Question> questions)
+    public async void AddQuestions(List<Question> questions)
     {
         _appDbContext.Questions.ExecuteDelete();
 
@@ -54,4 +54,7 @@ public class QuestionsRepository : IQuestionRespository
 
         await _appDbContext.SaveChangesAsync();
     }
+
+    public async Task DeleteAll() 
+        => await _appDbContext.Questions.ExecuteDeleteAsync();
 }

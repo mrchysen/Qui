@@ -85,4 +85,12 @@ public class QuestionsController : Controller
 
         return RedirectToAction("GetList");
     }
+
+    [HttpGet("delete-all")]
+    public async Task<IActionResult> DeleteAll()
+    {
+        await _questionRespository.DeleteAll();
+
+        return RedirectToAction("GetList");
+    }
 }

@@ -1,15 +1,17 @@
-﻿@page
-@model RazorPagesApp.Pages.Administration.UserResultsModel
+﻿@using QuiApp.WebMVC.Controllers.Users.Models
+
+@model UserListDto
+
 @{
     ViewData["Title"] = "Результаты";
     ViewData["css"] = "administration/user_results.css";
+    Layout = "../Shared/_AdminLayout.cshtml";
 }
 
 <main class="main-container text-style">
     <div class="href-wrapper">
-        <a class="button" href="/Administration/Questions">Назад</a>
-        <a class="button" href="/Administration/UserResults?handler=ExcelFile">Скачать результаты</a>
-        <a class="button" href="/Administration/UserResults?handler=Clear">Удалить всех</a>
+        <a class="button" href="#">Скачать результаты</a>
+        <a class="button" href="/users/delete-all">Удалить всех</a>
     </div>
 
     <div class="table-wrapper">
@@ -30,18 +32,18 @@
             {
                 <tr>
                     <td>@(i + 1)</td>
-                    <td>@Model.GetStartDate(Model.Users[i])</td>
+                    <td>@UserListDto.GetStartDate(Model.Users[i])</td>
                     <td>@Model.Users[i].Sername</td>
                     <td>@Model.Users[i].Name</td>
                     <td>@Model.Users[i].FatherName</td>
                     <td>@Model.Users[i].Age</td>
-                    <td>@(Model.Users[i].Sex.ToString() == "Man"? "Мужчина": "Женщина")</td>
+                    <td>@(Model.Users[i].Sex.ToString() == "Man" ? "Мужчина" : "Женщина")</td>
                     <td>@Model.Users[i].Progress.RightAnswers / @Model.Users[i].Progress.Answers.Count</td>
                     <td class="button-td">
-                        <a class="a-style" href="/Administration/User?Id=@Model.Users[i].Id">Полный отчёт</a>
+                        <a class="a-style" href="/users?id=@Model.Users[i].Id">Полный отчёт</a>
                     </td>
                     <td class="button-td">
-                        <a class="a-style" href="/Administration/UserResults?handler=DeleteUser&Id=@Model.Users[i].Id">Удалить</a>
+                        <a class="a-style" href="/users/delete?id=@Model.Users[i].Id">Удалить</a>
                     </td>
                 </tr>
             }

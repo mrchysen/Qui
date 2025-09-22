@@ -1,39 +1,39 @@
 ﻿using ClosedXML.Excel;
 using Core.Users;
 
-namespace Application.ExcelService;
+namespace QuiApp.Application.ExcelService;
 
 public interface IExcelService
 {
     public bool CreateExcelFile(List<User> users, string path);
-
 }
 
 public class ExcelGenerator : IExcelService
 {
-    protected int MaxQuestions = 0;
+    protected int _maxQuestions = 0;
 
     public bool CreateExcelFile(List<User> users, string path)
     {
         using var workbook = new XLWorkbook();
 
-        var worksheet = workbook.AddWorksheet("Лист1");
+        var worksheet = workbook.AddWorksheet("QuestionResultList");
 
         try
         {
             if (users != null)
             {
-                MaxQuestions = users.Max((user) => user.Progress.Answers.Count);
+                _maxQuestions = users.Max((user) => user.Progress.Answers.Count);
 
                 GenerateHeader(worksheet, users);
                 WriteAllUser(worksheet, users);
             }
 
-            worksheet.Columns(1, 10 + MaxQuestions * 5).AdjustToContents();
+            worksheet.Columns(1, 10 + _maxQuestions * 5).AdjustToContents();
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
+
             return false;
         }
 
@@ -50,9 +50,9 @@ public class ExcelGenerator : IExcelService
         }
 
         // Add border to end
-        sheet.Range(users.Count + 2, 1, users.Count + 2, 9 + 5 * MaxQuestions)
+        sheet.Range(users.Count + 2, 1, users.Count + 2, 9 + 5 * _maxQuestions)
             .Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-        sheet.Range(users.Count + 2, 1, users.Count + 2, 9 + 5 * MaxQuestions)
+        sheet.Range(users.Count + 2, 1, users.Count + 2, 9 + 5 * _maxQuestions)
             .Style.Border.BottomBorderColor = XLColor.Black;
     }
 
@@ -73,16 +73,16 @@ public class ExcelGenerator : IExcelService
             AddCellValue(sheet, i + 3, 6 + j * 5 + 4, (user.Progress.WasSearched[j] ? 1 : 0).ToString()); // искал ли в инете
         }
 
-        AddCellValue(sheet, i + 3, 6 + MaxQuestions * 5, user.Progress.RightAnswers.ToString());
-        AddCellValue(sheet, i + 3, 6 + MaxQuestions * 5 + 1, user.Progress.Answers.Count.ToString());
-        AddCellValue(sheet, i + 3, 6 + MaxQuestions * 5 + 2, user.Progress.WasSearched.Select(e => e ? 1 : 0).Sum().ToString());
+        AddCellValue(sheet, i + 3, 6 + _maxQuestions * 5, user.Progress.RightAnswers.ToString());
+        AddCellValue(sheet, i + 3, 6 + _maxQuestions * 5 + 1, user.Progress.Answers.Count.ToString());
+        AddCellValue(sheet, i + 3, 6 + _maxQuestions * 5 + 2, user.Progress.WasSearched.Select(e => e ? 1 : 0).Sum().ToString());
 
         TimeSpan timeSpan = new(0, 0, 0);
 
         if (user.Progress.AnswerStartDateTime.Count > 0 && user.Progress.AnswerEndDateTime.Count > 0)
             timeSpan = user.Progress.AnswerEndDateTime.Last() - user.Progress.AnswerStartDateTime[0];
 
-        AddCellValue(sheet, i + 3, 6 + MaxQuestions * 5 + 3, timeSpan.ToString());
+        AddCellValue(sheet, i + 3, 6 + _maxQuestions * 5 + 3, timeSpan.ToString());
     }
 
     protected bool IndexCondition(int index, User User)
@@ -114,12 +114,12 @@ public class ExcelGenerator : IExcelService
         SimpleHeaderPart(sheet, 5, 1, "Возраст");
 
 
-        for (int i = 0; i < MaxQuestions; i++)
+        for (int i = 0; i < _maxQuestions; i++)
         {
             QuestionCellGenerate(sheet, i);
         }
 
-        int endHeaders = MaxQuestions * 5 + 6;
+        int endHeaders = _maxQuestions * 5 + 6;
 
         SimpleHeaderPart(sheet, endHeaders, 1, "Правильных ответов", 25);
         SimpleHeaderPart(sheet, endHeaders + 1, 1, "Всего ответов", 25);

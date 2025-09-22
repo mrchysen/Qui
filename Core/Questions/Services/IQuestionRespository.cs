@@ -5,12 +5,11 @@ namespace Core.Questions.QuestionServices;
 
 public interface IQuestionRespository
 {
-    void SaveQuestions(List<Question> questions);
     Task<List<Question>> GetQuestions();
-    void DeleteQuestion(Guid id);
-
     Task<List<Question>> GetByFilter(Expression<Func<Question, bool>> filter);
+    void AddQuestions(List<Question> questions);
     Task AddQuestion(Question question);
-
     Task Update(Question question);
+    void DeleteQuestion(Guid id);
+    Task DeleteAll();
 }
