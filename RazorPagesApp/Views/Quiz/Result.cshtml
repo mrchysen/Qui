@@ -8,36 +8,33 @@
     Layout = "../Shared/_MainLayout.cshtml";
 }
 
-<main>
-    <section class="info-section">
-        <div class="text-style">Спасибо за прохождение тестирования. Правильных ответов: @Model.Progress.RightAnswers</div>
-        <div class="text-style">Вы нам очень помогли!</div>
-    </section>
+<section class="info-section">
+    <div class="text-style">Спасибо за прохождение тестирования. Правильных ответов: @Model.Progress.RightAnswers</div>
+    <div class="text-style">Вы нам очень помогли!</div>
+</section>
 
-    <hr class="line" />
-    <div class="table-wrapper">
-        <table>
+<hr class="line" />
+
+<div class="table-wrapper">
+    <table>
+        <tr>
+            <td class="head text-style">Номер</td>
+            <td class="head text-style">Вопрос</td>
+            <td class="head text-style">Ответ</td>
+            <td class="head text-style">Правильность</td>
+        </tr>
+        @for (int i = 0; i < Model.Progress.Answers.Count; i++)
+        {
             <tr>
-                <td class="head text-style">Номер</td>
-                <td class="head text-style">Вопрос</td>
-                <td class="head text-style">Ответ</td>
-                <td class="head text-style">Правильность</td>
+                <td class="text-centre text-style">@(i + 1)</td>
+                <td class="text-style">@Model.Questions[i].Text</td>
+                <td class="text-style">@Model.Progress.Answers[i]</td>
+                <td class="text-style">@(Model.Questions[i].IsAnswer(Model.Progress.Answers[i]) ? "Правильно" : "Неправильно")</td>
             </tr>
-            @for (int i = 0; i < Model.Progress.Answers.Count; i++)
-            {
-                <tr>
-                    <td class="text-centre text-style">@(i + 1)</td>
-                    <td class="text-style">@Model.Questions[i].Text</td>
-                    <td class="text-style">@Model.Progress.Answers[i]</td>
-                    <td class="text-style">@(Model.Questions[i].IsAnswer(Model.Progress.Answers[i]) ? "Правильно" : "Неправильно")</td>
-                </tr>
-            }
-        </table>
-    </div>
+        }
+    </table>
+</div>
 
+<hr class="line" />
 
-
-    <hr class="line" />
-
-    <a class="button text-style" href="@Url.Action("LoginPage", "Users")">Пройти заново</a>
-</main>
+<a class="button text-style" href="@Url.Action("LoginPage", "Users")">Пройти заново</a>

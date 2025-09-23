@@ -1,5 +1,6 @@
-﻿@using QuiApp.WebMVC.Controllers.Quizes.Models
-@model InfoData
+﻿@using QuiApp.WebMVC.Controllers.Quiz.Models
+
+@model InfoDataDto
 
 @{
     Layout = "../Shared/_MainLayout.cshtml";
@@ -7,7 +8,7 @@
 
 <div class="card m-2">
     <div class="card-header">
-        О тесте:
+        @Model.QuestionPackName
     </div>
     <div class="card-body">
         <p class="card-text">@Model.InfoMessage</p>

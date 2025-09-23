@@ -54,7 +54,7 @@ public class QuestionsController : Controller
             .Select(x => x.Trim())
             .ToList();
 
-        _questionRespository.Update(question);
+        await _questionRespository.Update(question);
 
         return RedirectToAction("GetList");
     }

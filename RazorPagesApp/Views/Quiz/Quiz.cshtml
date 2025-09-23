@@ -1,12 +1,14 @@
 ﻿@using QuiApp.WebMVC.Components
-@using QuiApp.WebMVC.Controllers.Quizes.Models
+@using QuiApp.WebMVC.Controllers.Quiz.Models
 
-@model QuizData
+@model QuizDataDto
 
 @{
     ViewData["css"] = "quiz/question.css";
-    ViewData["Title"] = "Тест";
+    ViewData["Title"] = Model.QuestionPackName;
     Layout = "../Shared/_MainLayout.cshtml";
 }
 
-@(await Html.RenderComponentAsync<Quiz>(RenderMode.ServerPrerendered, new { Questions = Model.Questions}))
+@(await Html.RenderComponentAsync<QuestionComponent>(
+    RenderMode.ServerPrerendered, 
+    new { Questions = Model.Questions }))
