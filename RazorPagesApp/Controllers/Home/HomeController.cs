@@ -1,10 +1,12 @@
 ﻿using Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RazorPagesApp.Extensions;
 
 namespace RazorPagesApp.Controllers.Home;
 
 [Route("")]
+[Authorize]
 public class HomeController : Controller
 {
     private ISession _session => HttpContext.Session;
