@@ -1,6 +1,11 @@
 <Solution>
+  <Folder Name="/Элементы решения/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="Api/Qui.Api.csproj" />
   <Project Path="Application/Qui.Application.csproj" />
   <Project Path="Core/Qui.Core.csproj" />
   <Project Path="DAL/Qui.DAL.csproj" />
-  <Project Path="Api/Qui.Api.csproj" />
 </Solution>

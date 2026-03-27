@@ -4,8 +4,8 @@ namespace Qui.Core.Services.Questions;
 
 public interface IQuestionRespository
 {
-    public void SaveQuestions(List<Question> questions);
-    public List<Question> GetQuestions();
-    public void DeleteQuestion(Guid id);
-    public void AddQuestion(Question question);
+    public Task SaveQuestions(List<Question> questions);
+    public Task<List<Question>> GetQuestions();
+    public Task DeleteQuestion(Guid id);
+    public Task AddQuestion(Question question);
 }

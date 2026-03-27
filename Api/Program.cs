@@ -1,17 +1,19 @@
-using Core.Services.Authorization;
-using Core.Services.Questions;
 using Microsoft.EntityFrameworkCore;
 using Qui.Api.Middelwares;
+using Qui.Core.Services.Authorization;
+using Qui.Core.Services.Progress;
+using Qui.Core.Services.Questions;
 using Qui.DAL;
-using RazorPagesApp.Services.Progress;
-using RazorPagesApp.Services.Questions;
+using Qui.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite());
 
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IQuestionRespository, QuestionRespository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAdminRegistrationRepository, AdminRegistrationRepository>();
 
 builder.Services.AddHttpContextAccessor();    // Enable use HttpContext in constructors
 builder.Services.AddDistributedMemoryCache(); // Add caching

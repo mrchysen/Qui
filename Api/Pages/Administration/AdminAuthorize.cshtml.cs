@@ -7,10 +7,10 @@ namespace Qui.Api.Pages.Administration
 {
     public class AdminAuthorizeModel : PageModel
     {
-        protected IAdminRegistration Registrator { get; set; }
+        protected IAdminRegistrationRepository Registrator { get; set; }
         public string Info { get; set; } = "";
 
-        public AdminAuthorizeModel(IAdminRegistration registrator) 
+        public AdminAuthorizeModel(IAdminRegistrationRepository registrator) 
         {
             Registrator = registrator;
         }

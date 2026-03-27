@@ -2,7 +2,7 @@
 
 namespace Qui.Core.Services.Authorization;
 
-public class SimpleAdminRegistrationService : IAdminRegistration
+public class SimpleAdminRegistrationService : IAdminRegistrationRepository
 {
     protected List<Registration> Registrations = new List<Registration>();
     protected string FilePath { get; set; }

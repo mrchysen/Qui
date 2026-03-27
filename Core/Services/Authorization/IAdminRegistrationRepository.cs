@@ -2,7 +2,7 @@
 
 namespace Qui.Core.Services.Authorization;
 
-public interface IAdminRegistration
+public interface IAdminRegistrationRepository
 {
     public bool IsAdmin(Registration registration);
 }
