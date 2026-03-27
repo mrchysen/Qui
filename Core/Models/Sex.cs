@@ -1,4 +1,4 @@
-﻿namespace Core.Models;
+﻿namespace Qui.Core.Models;
 
 public enum Sex
 {

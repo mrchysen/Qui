@@ -1,8 +1,9 @@
-﻿using System.Text.Encodings.Web;
+﻿using Qui.Api.Extensions;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 
-namespace RazorPagesApp.Extensions;
+namespace Qui.Api.Extensions;
 
 /// <summary>
 /// Custom extension for sessions to make json serialization of object to 

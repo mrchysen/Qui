@@ -1,12 +1,12 @@
-using Application.ExcelService;
-using Core.Models;
-using Core.Services.Questions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Services.Progress;
+using Qui.Application.ExcelService;
+using Qui.Core.Models;
+using Qui.Core.Services.Progress;
+using Qui.Core.Services.Questions;
 using System.Globalization;
 
-namespace RazorPagesApp.Pages.Administration;
+namespace Qui.Api.Pages.Administration;
 
 public class UserResultsModel : PageModel
 {

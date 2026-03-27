@@ -1,8 +1,8 @@
-﻿using Core.Models;
-using Microsoft.AspNetCore.Mvc;
-using RazorPagesApp.Extensions;
+﻿using Microsoft.AspNetCore.Mvc;
+using Qui.Api.Extensions;
+using Qui.Core.Models;
 
-namespace RazorPagesApp.Controllers.Home;
+namespace Qui.Api.Controllers.Home;
 
 [Route("")]
 public class HomeController : Controller

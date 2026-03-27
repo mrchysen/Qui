@@ -1,6 +1,5 @@
-﻿using Core.Models;
-using Core.Services.Questions;
-namespace RazorPagesApp.Services.Questions;
+﻿using Qui.Core.Models;
+namespace Qui.Core.Services.Questions;
 public class QuestionService : IQuestionHandler
 {
     protected List<Question> Questions { get; set; } = new();

@@ -1,8 +1,8 @@
 using Core.Services.Authorization;
 using Core.Services.Questions;
-using DAL;
 using Microsoft.EntityFrameworkCore;
-using RazorPagesApp.Middelwares;
+using Qui.Api.Middelwares;
+using Qui.DAL;
 using RazorPagesApp.Services.Progress;
 using RazorPagesApp.Services.Questions;
 

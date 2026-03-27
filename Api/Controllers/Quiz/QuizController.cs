@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace RazorPagesApp.Controllers.Quiz;
+namespace Qui.Api.Controllers.Quiz;
 
 [Route("Quiz")]
 public class QuizController : Controller

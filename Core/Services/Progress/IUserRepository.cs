@@ -1,6 +1,6 @@
-﻿using Core.Models;
+﻿using Qui.Core.Models;
 
-namespace RazorPagesApp.Services.Progress;
+namespace Qui.Core.Services.Progress;
 
 public interface IUserRepository
 {

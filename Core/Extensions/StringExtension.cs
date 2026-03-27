@@ -1,4 +1,4 @@
-﻿namespace Core.Extensions;
+﻿namespace Qui.Core.Extensions;
 
 public static class StringExtension
 {

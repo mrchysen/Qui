@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RazorPagesApp.Views
+namespace Qui.Api.Views
 {
     public class _LayoutModel : PageModel
     {

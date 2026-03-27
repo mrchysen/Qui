@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml;
 
-namespace RazorPagesApp.Middelwares;
+namespace Qui.Api.Middelwares;
 
 /// <summary>
 /// This middleware watch for not-authentication user and redirect them to 

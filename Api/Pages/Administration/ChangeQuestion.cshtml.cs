@@ -1,10 +1,10 @@
-using Core.Models;
-using Core.Services.Questions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Primitives;
+using Qui.Core.Models;
+using Qui.Core.Services.Questions;
 
-namespace RazorPagesApp.Pages.Administration;
+namespace Qui.Api.Pages.Administration;
 
 public class ChangeQuestionModel : PageModel
 {

@@ -1,6 +1,6 @@
-﻿using Core.Models;
+﻿using Qui.Core.Models;
 
-namespace Core.Services.Questions;
+namespace Qui.Core.Services.Questions;
 public interface IQuestionHandler
 {
     public int Count { get; }

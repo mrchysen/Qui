@@ -1,9 +1,9 @@
-using Core.Models;
-using Core.Services.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Qui.Core.Models;
+using Qui.Core.Services.Authorization;
 
-namespace RazorPagesApp.Pages.Administration
+namespace Qui.Api.Pages.Administration
 {
     public class AdminAuthorizeModel : PageModel
     {

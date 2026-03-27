@@ -1,11 +1,11 @@
-﻿using Core.Models;
-using Core.Services.Authorization;
-using Core.Services.Questions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using RazorPagesApp.Services.Progress;
+using Qui.Core.Models;
+using Qui.Core.Services.Authorization;
+using Qui.Core.Services.Progress;
+using Qui.Core.Services.Questions;
 
-namespace DAL;
+namespace Qui.DAL;
 
 public class AppDbContext : DbContext, IQuestionRespository, IUserRepository, IAdminRegistration
 {

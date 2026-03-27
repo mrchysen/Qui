@@ -1,6 +1,6 @@
-﻿using Core.Models;
+﻿using Qui.Core.Models;
 
-namespace RazorPagesApp.Middelwares;
+namespace Qui.Api.Middelwares;
 
 public class ZeroQuestionControllerMiddelware
 {

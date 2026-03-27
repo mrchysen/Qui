@@ -1,10 +1,10 @@
-﻿using Core.Extensions;
-using Core.Models;
+﻿using Qui.Core.Extensions;
+using Qui.Core.Models;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 
-namespace RazorPagesApp.Services.Progress;
+namespace Qui.Core.Services.Progress;
 
 /// <summary>
 /// Простой сервис для сохранения результатов в файлик

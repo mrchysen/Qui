@@ -1,7 +1,7 @@
-﻿using Core.Services.Questions;
-using RazorPagesApp.Services.Progress;
+﻿using Qui.Core.Services.Progress;
+using Qui.Core.Services.Questions;
 
-namespace DAL;
+namespace Qui.DAL;
 
 public interface IUnitOfWork : IDisposable
 {

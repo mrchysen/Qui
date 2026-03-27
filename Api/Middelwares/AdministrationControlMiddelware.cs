@@ -1,4 +1,4 @@
-﻿namespace RazorPagesApp.Middelwares;
+﻿namespace Qui.Api.Middelwares;
 
 public class AdministrationControlMiddelware
 {

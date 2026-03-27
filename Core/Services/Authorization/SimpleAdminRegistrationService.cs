@@ -1,6 +1,6 @@
-﻿using Core.Models;
+﻿using Qui.Core.Models;
 
-namespace Core.Services.Authorization;
+namespace Qui.Core.Services.Authorization;
 
 public class SimpleAdminRegistrationService : IAdminRegistration
 {

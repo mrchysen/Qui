@@ -1,11 +1,11 @@
-using Core.Models;
-using Core.Services.Questions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Extensions;
-using RazorPagesApp.Services.Progress;
+using Qui.Api.Extensions;
+using Qui.Core.Models;
+using Qui.Core.Services.Progress;
+using Qui.Core.Services.Questions;
 
-namespace RazorPagesApp.Pages.Quiz;
+namespace Qui.Api.Pages.Quiz;
 
 public class ResultModel : PageModel
 {

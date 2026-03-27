@@ -1,9 +1,9 @@
-using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Services.Progress;
+using Qui.Core.Models;
+using Qui.Core.Services.Progress;
 
-namespace RazorPagesApp.Pages.Administration;
+namespace Qui.Api.Pages.Administration;
 
 public class UserModel : PageModel
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.Models;
+namespace Qui.Core.Models;
 
 public class User
 {

@@ -1,9 +1,9 @@
-using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Extensions;
+using Qui.Api.Extensions;
+using Qui.Core.Models;
 
-namespace RazorPagesApp.Pages.Quiz;
+namespace Qui.Api.Pages.Quiz;
 
 /// <summary>
 /// Authentication page

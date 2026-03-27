@@ -1,7 +1,7 @@
-﻿using Core.Services.Questions;
+﻿using Qui.Core.Services.Questions;
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Models;
+namespace Qui.Core.Models;
 
 public class UserProgress
 {

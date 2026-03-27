@@ -1,7 +1,7 @@
 ﻿using ClosedXML.Excel;
-using Core.Models;
+using Qui.Core.Models;
 
-namespace Application.ExcelService;
+namespace Qui.Application.ExcelService;
 
 public interface IExcelService
 {
