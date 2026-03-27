@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Application/Qui.Application.csproj" />
+  <Project Path="Core/Qui.Core.csproj" />
+  <Project Path="DAL/Qui.DAL.csproj" />
+  <Project Path="Api/Qui.Api.csproj" />
+</Solution>
